@@ -1,28 +1,39 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'dart:async';
+import 'dart:io';
+
 import 'package:ewu_portal/Advising_rule.dart';
-import 'package:ewu_portal/advising.dart';
-import 'package:ewu_portal/curriculumn/Curriculumn.dart';
+import 'package:ewu_portal/Profile.dart';
 import 'package:ewu_portal/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:http/http.dart' as http;
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import '../DegreeReview.dart';
+import '../FacEvaluation.dart';
+import '../GradeReport.dart';
+import '../InstallmentPayment.dart';
+import '../MyAccLeadger.dart';
+import '../OfferedCourse.dart';
+import '../SemesterDrop.dart';
+import '../UploadDoc.dart';
+import '../advising.dart';
+import '../classSche.dart';
+import 'package:file_picker/file_picker.dart';
 
-import 'DegreeReview.dart';
-import 'FacEvaluation.dart';
-import 'GradeReport.dart';
-import 'InstallmentPayment.dart';
-import 'MyAccLeadger.dart';
-import 'OfferedCourse.dart';
-import 'SemesterDrop.dart';
-import 'UploadDoc.dart';
-import 'classSche.dart';
-import 'convo.dart';
+import '../convo.dart';
 
 GlobalKey<ScaffoldState> key = GlobalKey();
+class pdfView extends StatelessWidget {
+  final String src;
+  final int a;
 
-
-class profile extends StatelessWidget {
-  const profile({super.key});
+  const pdfView(int this.a,String this.src, {super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,12 +49,11 @@ class profile extends StatelessWidget {
 
             ),
             onPressed: (){
+
               Navigator.of(context).pop();
-
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context)=> Home(
+                builder: (context)=>Home(
                 ),
-
 
               ));
 
@@ -84,11 +94,18 @@ class profile extends StatelessWidget {
                 )),
           ),
           iconTheme: IconThemeData(color: Colors.black, size: 40),
-          actions: [IconButton(
-            icon: FaIcon(FontAwesomeIcons.user,color: Colors.white,size: 20,),
-            //style: ,
-            onPressed: null,
-          ),
+          actions: [
+            IconButton(
+              icon: FaIcon(FontAwesomeIcons.user,color: Color.fromARGB(255, 40, 65, 111),size: 20,),
+              style: IconButton.styleFrom(backgroundColor: Color.fromARGB(
+                  124, 255, 255, 255),),//style: ,
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context)=> profile(),
+                ));
+              },
+            ),
           ],
         ),
         drawer: Drawer(
@@ -233,20 +250,14 @@ class profile extends StatelessWidget {
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
-                trailing: FaIcon(
-                  FontAwesomeIcons.chevronRight,
-                  color: Colors.white,
-                  size: 20,
-                ),
-                onTap: () {
-
-
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context)=> Curriculumn(),
-                  ));
-
-                },
+                /*
+              trailing: FaIcon(
+                FontAwesomeIcons.chevronRight,
+                color: Colors.white,
+                size: 20,
+              ),
+              */
+                //onTap: () {},
               ),
               ListTile(
                 leading: FaIcon(
@@ -423,212 +434,25 @@ class profile extends StatelessWidget {
           ),
         ),
 
-        body: Center(
-          child: ListView(
-            children: [
-              Container(
-                height: 25,
-
-              ),Divider(
-                height: 20,
-                thickness: 0.3,
-                color: Colors.black,
-              ),Container(
-                height: 30,
-
-              ),
-              Column( children: [
-                Container(
-                margin: EdgeInsetsDirectional.all(20),
-                height: 500,
-                width: 380,
-                color: Color.fromARGB(255, 240, 244, 245),
-                child: Center(
-                  child: Column(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(vertical: 0),
-                        height: 280,
-                        width: 200,
-                        child: Image.asset(
-                          "assets/bateman.jpg",
-
-                        ) ,
-                      ),
-                      Container(
-                        alignment: Alignment.center,
-                        child:  Column(
-                          children: [
-                            ListTile( title: Text(getpfName(), textAlign: TextAlign.center,style:
-                            TextStyle(color: Color.fromARGB(255, 74, 72, 72),fontSize: 20,fontWeight: FontWeight.bold),),),
-                            ListTile(
-                              title: Text("Student ID: "+ getId() + "\n Unique ID: 00922305101045\n Program: CSE\n Department: CSE\n Credits completed: 63\n CGPA: 4.20", textAlign: TextAlign.center,style:
-                              TextStyle(color: Colors.black45,fontSize: 14,fontWeight: FontWeight.bold),),
-                            ),
-                          ],
-                        )
-
-
-                      ),
-
-                    ],
-                  ),
-                ),
-
-
-              ),
-
-
-              ]),
-
-
-              Container(
-                margin:EdgeInsets.only(left: 5),
-                //margin: EdgeInsetsDirectional.all(5),
-                child: Column(
-                  children: [
-                    ListTile(
-                      title: Text("CONTACT INFORMATION",style:
-                      TextStyle(color: Colors.grey[700],fontSize: 18,fontWeight: FontWeight.bold),),
-                    ),
-
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      leading:FaIcon(FontAwesomeIcons.phone,size: 18,color: Colors.green,),
-                      title: Text("01839228924",style:
-                      TextStyle(color: Colors.grey[700],fontSize: 14),),
-                    ),
-                    SizedBox(height: 0),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      leading:FaIcon(FontAwesomeIcons.envelope,size: 18,color: Colors.blue,),
-                      title: Text("2022-3-60-045@std.ewubd.edu",style:
-                      TextStyle(color: Colors.grey[700],fontSize: 14),),
-                    ),
-                    SizedBox(height: 15),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      title: Text("PRESENT ADDRESS",style:
-                      TextStyle(color: Colors.grey[700],fontSize: 18,fontWeight: FontWeight.bold),),
-                    ),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      title: Text("House # 109 (6th Floor),Agamashi Lane,Bongshal,Dhaka",style:
-                      TextStyle(color: Colors.grey[700],fontSize: 14),),
-                    ),
-                    SizedBox(height: 15),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      title: Text("PARMANET ADDRESS",style:
-                      TextStyle(color: Colors.grey[700],fontSize: 18,fontWeight: FontWeight.bold),),
-                    ),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      title: Text("Wayne Manor, 1007 Mountain Drive, Gotham",style:
-                      TextStyle(color: Colors.grey[700],fontSize: 14),),
-                    ),
-                    SizedBox(height: 15),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      title: Text("OTHER DETAILS",style:
-                      TextStyle(color: Colors.grey[700],fontSize: 18,fontWeight: FontWeight.bold),),
-                    ),
-                    SizedBox(height: 5,),
-
-                    Container(
-                      height: 60, width: 1200, color: Color.fromARGB(255, 240, 244, 245),
-                      child: Container( margin: EdgeInsets.only(top: 20,left: 20),
-                        child:Text("Admitted Semester",style:
-                        TextStyle(color: Colors.grey[700],fontSize: 16,fontWeight: FontWeight.bold),),
-                      )
-                    ),
-                    Container(
-                        height: 60, width: 1200, color: Color.fromARGB(255, 248, 250, 250),
-                        child: Container(
-                          margin: EdgeInsets.only(top: 20,left: 20),
-                          child:Text("Fall 2022",style:
-                          TextStyle(color: Colors.grey[700],fontSize: 16,),),
-                        )
-                    ),
-
-                    Container(
-                        height: 60, width: 1200, color: Color.fromARGB(255, 240, 244, 245),
-                        child: Container( margin: EdgeInsets.only(top: 20,left: 20),
-                          child:Text("Date of Birth",style:
-                          TextStyle(color: Colors.grey[700],fontSize: 16,fontWeight: FontWeight.bold),),
-                        )
-                    ),
-                    Container(
-                        height: 60, width: 1200, color: Color.fromARGB(255, 248, 250, 250),
-                        child: Container(
-                          margin: EdgeInsets.only(top: 20,left: 20),
-                          child:Text("29-01-2001",style:
-                          TextStyle(color: Colors.grey[700],fontSize: 16,),),
-                        )
-                    ),
-
-                    Container(
-                        height: 60, width: 1200, color: Color.fromARGB(255, 240, 244, 245),
-                        child: Container( margin: EdgeInsets.only(top: 20,left: 20),
-                          child:Text("Blood Group",style:
-                          TextStyle(color: Colors.grey[700],fontSize: 16,fontWeight: FontWeight.bold),),
-                        )
-                    ),
-                    Container(
-                        height: 60, width: 1200, color: Color.fromARGB(255, 248, 250, 250),
-                        child: Container(
-                          margin: EdgeInsets.only(top: 20,left: 20),
-                          child:Text("A+",style:
-                          TextStyle(color: Colors.grey[700],fontSize: 16,),),
-                        )
-                    ),
-
-
-                    Container(
-                        height: 60, width: 1200, color: Color.fromARGB(255, 240, 244, 245),
-                        child: Container( margin: EdgeInsets.only(top: 20,left: 20),
-                          child:Text("Marital Status",style:
-                          TextStyle(color: Colors.grey[700],fontSize: 16,fontWeight: FontWeight.bold),),
-                        )
-                    ),
-                    Container(
-                        height: 60, width: 1200, color: Color.fromARGB(255, 248, 250, 250),
-                        child: Container(
-                          margin: EdgeInsets.only(top: 20,left: 20),
-                          child:Text("Single",style:
-                          TextStyle(color: Colors.grey[700],fontSize: 16,),),
-                        )
-                    ),
-
-                    Container(
-                        height: 60, width: 1200, color: Color.fromARGB(255, 240, 244, 245),
-                        child: Container( margin: EdgeInsets.only(top: 20,left: 20),
-                          child:Text("Advisor",style:
-                          TextStyle(color: Colors.grey[700],fontSize: 16,fontWeight: FontWeight.bold),),
-                        )
-                    ),
-                    Container(
-                        height: 90, width: 1200, color: Color.fromARGB(255, 248, 250, 250),
-                        child: Container(
-                          margin: EdgeInsets.only(top: 20,left: 20),
-                          child:Text("Dr. Md. Tauhid Bin Iqbal(DTBI) \ntauhid.iqbal@ewubd.edu",style:
-                          TextStyle(color: Colors.grey[700],fontSize: 16,),),
-                        )
-                    ),
-
-
-                  ],
-
-
-                )
-              ),
-
-            ],
-
-          ),
-        ),
+        body: showpdf(a,src)
+        //SfPdfViewer.asset(src),
+        //SfPdfViewer.network(src)
 
 
     );
   }
+
+  showpdf(int a, String src) {
+    if(a==1){
+      return SfPdfViewer.network(src);
+
+    }
+    else {
+      return SfPdfViewer.asset(src);
+
+    }
+  }
+
 }
 
-String getpfName(){
-  return "MD. Saiful Islam";
-}
-String getId(){
-  return "2022-3-60-045";
-}
+

@@ -1,28 +1,38 @@
-import 'package:ewu_portal/advising.dart';
-import 'package:ewu_portal/curriculumn/Curriculumn.dart';
+// ignore_for_file: prefer_const_constructors
+
+import 'dart:io';
+
+import 'package:ewu_portal/Advising_rule.dart';
 import 'package:ewu_portal/Profile.dart';
+import 'package:ewu_portal/advising.dart';
+import 'package:ewu_portal/curriculumn/pdfViwer.dart';
+import 'package:ewu_portal/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:http/http.dart' as http;
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import '../DegreeReview.dart';
+import '../FacEvaluation.dart';
+import '../GradeReport.dart';
+import '../InstallmentPayment.dart';
+import '../MyAccLeadger.dart';
+import '../OfferedCourse.dart';
+import '../SemesterDrop.dart';
+import '../UploadDoc.dart';
+import '../classSche.dart';
+import 'package:file_picker/file_picker.dart';
 
-import 'DegreeReview.dart';
-import 'FacEvaluation.dart';
-import 'GradeReport.dart';
-import 'InstallmentPayment.dart';
-import 'MyAccLeadger.dart';
-import 'OfferedCourse.dart';
-import 'SemesterDrop.dart';
-import 'UploadDoc.dart';
-import 'classSche.dart';
-import 'convo.dart';
-import 'main.dart';
+import '../convo.dart';
 
 GlobalKey<ScaffoldState> key = GlobalKey();
 
 
-class AdvisingRule extends StatelessWidget {
-  const AdvisingRule({super.key});
+class Curriculumn extends StatelessWidget {
+  const Curriculumn({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -168,14 +178,19 @@ class AdvisingRule extends StatelessWidget {
                 style: TextStyle(
                     color: Colors.white, fontWeight: FontWeight.bold),
               ),
-              /*
               trailing: FaIcon(
                 FontAwesomeIcons.chevronRight,
                 color: Colors.white,
                 size: 20,
               ),
-              */
-              //onTap: () {},
+              onTap: () {
+
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context)=> AdvisingRule(),
+                ));
+
+              },
             ),
             ListTile(
               leading: FaIcon(
@@ -234,20 +249,14 @@ class AdvisingRule extends StatelessWidget {
                 style: TextStyle(
                     color: Colors.white, fontWeight: FontWeight.bold),
               ),
+              /*
               trailing: FaIcon(
                 FontAwesomeIcons.chevronRight,
                 color: Colors.white,
                 size: 20,
               ),
-              onTap: () {
-
-
-                Navigator.of(context).pop();
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context)=> Curriculumn(),
-                ));
-
-              },
+              */
+              //onTap: () {},
             ),
             ListTile(
               leading: FaIcon(
@@ -424,150 +433,65 @@ class AdvisingRule extends StatelessWidget {
         ),
       ),
 
-      body: Center(
-        child: ListView(
-          children: [
-            Container(
-              height: 25,
+      body:
+      Column(
+        children: [
 
-            ),Divider(
-              height: 20,
-              thickness: 0.3,
-              color: Colors.black,
-            ),Container(
-              height: 30,
+          Container(
+            height: 25,
 
-            ),
-            Container(
-              height: 50,
-              width: 50,
-              color: Color.fromARGB(255, 240, 244, 245),
-              child: Container(
-                  margin: EdgeInsets.only(top: 10),
-                  child:
-              Text("ADVISING RULES",textAlign: TextAlign.center,style: TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.bold),)),
+          ),Divider(
+            height: 20,
+            thickness: 0.3,
+            color: Colors.black,
+          ),Container(
+            height: 30,
 
-            ),
-            Container(
-              height: 30,
+          ),
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
 
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 50,right: 50),
-              child: Center(
-                child: Column(
-                  children: [
-                    ListTile(
-                      visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      title: Text.rich(TextSpan(style:
-                      TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.bold),
-                      text: "Program Type: ",children: [
-                        TextSpan(text: "Undergraduation",style:TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.normal))
-                          ]),),
-                    ),
-                    ListTile(
-                      visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      title: Text.rich(TextSpan(style:
-                      TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.bold),
-                          text: "Department: ",children: [
-                            TextSpan(text: "Depertment of CSE",style:TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.normal))
-                          ]),),
-                    ),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),),
-                    ListTile(
-                      visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      title: Text.rich(TextSpan(style:
-                      TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.bold),
-                          text: "Completed Credit: ",children: [
-                            TextSpan(text: "63",style:TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.normal))
-                          ]),),
-                    ),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      title: Text.rich(TextSpan(style:
-                      TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.bold),
-                          text: "Max Courses per day: ",children: [
-                            TextSpan(text: "3",style:TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.normal))
-                          ]),),
-                    ),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      title: Text.rich(TextSpan(style:
-                      TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.bold),
-                          text: "Minimum CGPA Required: ",children: [
-                            TextSpan(text: "2.16",style:TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.normal))
-                          ]),),
-                    ),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      title: Text.rich(TextSpan(style:
-                      TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.bold),
-                          text: "Max CGPA Required:  ",children: [
-                            TextSpan(text: "4.0",style:TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.normal))
-                          ]),),
-                    ),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      title: Text.rich(TextSpan(style:
-                      TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.bold),
-                          text: "Stydent ID: ",children: [
-                            TextSpan(text: "2022-3-60-045",style:TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.normal))
-                          ]),),
-                    ),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      title: Text.rich(TextSpan(style:
-                      TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.bold),
-                          text: "Unique ID: ",children: [
-                            TextSpan(text: "00922305101045",style:TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.normal))
-                          ]),),
-                    ),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      title: Text.rich(TextSpan(style:
-                      TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.bold),
-                          text: "Max Credit: ",children: [
-                            TextSpan(text: "21",style:TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.normal))
-                          ]),),
-                    ),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      title: Text.rich(TextSpan(style:
-                      TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.bold),
-                          text: "Min Credit: ",children: [
-                            TextSpan(text: "12",style:TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.normal))
-                          ]),),
-                    ),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      title: Text.rich(TextSpan(style:
-                      TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.bold),
-                          text: "Max Course: ",children: [
-                            TextSpan(text: "6",style:TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.normal))
-                          ]),),
-                    ),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      title: Text.rich(TextSpan(style:
-                      TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.bold),
-                          text: "Min Course: ",children: [
-                            TextSpan(text: "3",style:TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.normal))
-                          ]),),
-                    ),
+                  margin: EdgeInsets.only(right: 3),height: 40,width: 230,
+                  child: ElevatedButton.icon(onPressed: () {
 
-                  ],
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context)=> pdfView(2,"assets/cse.pdf")
+                    ));
+                  },
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.green,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7))),
+                    label: Text("Show My Program Curriculumn",style: TextStyle(color: Colors.white,fontSize: 12),),
+                      icon: FaIcon(FontAwesomeIcons.bookOpen,color: Colors.white,size: 10,),),
                 ),
-              ),
+                Container(
+                  margin: EdgeInsets.only(left: 4),height: 40,width: 150,
+                  child: ElevatedButton.icon(onPressed: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context)=> pdfView(1,"https://www.ewubd.edu/storage/app/media/Undergraduate%20Bulletin/ewuundergraduate-bulletin-14th-edition-doc-version.pdf"),
+                    ));
+                  },
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.blue[800],shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7))),
+                    label: Text("Show Blue Book",style: TextStyle(color: Colors.white,fontSize: 12),),
+                    icon: FaIcon(FontAwesomeIcons.book,color: Colors.white,size: 10,),),
+                )
+              ],
             ),
+          ),
+          Container(
+            height: 30,
 
-            Divider(
-              height: 20,
-              thickness: 0.3,
-              color: Colors.black,
-            ),
-            Container(height: 100,width: 50,),
-
-          ],
-
-        ),
-      ),
+          ),
+        ],
+      )
 
 
     );
   }
+
 }
+
+

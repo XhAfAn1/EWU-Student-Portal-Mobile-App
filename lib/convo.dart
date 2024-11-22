@@ -1,21 +1,32 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:io';
 import 'package:ewu_portal/Advising_rule.dart';
 import 'package:ewu_portal/Profile.dart';
+import 'package:ewu_portal/advising.dart';
+import 'package:ewu_portal/curriculumn/Curriculumn.dart';
 import 'package:ewu_portal/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'DegreeReview.dart';
+import 'FacEvaluation.dart';
+import 'GradeReport.dart';
+import 'InstallmentPayment.dart';
+import 'MyAccLeadger.dart';
+import 'OfferedCourse.dart';
+import 'SemesterDrop.dart';
+import 'UploadDoc.dart';
 import 'classSche.dart';
 
 
 GlobalKey<ScaffoldState> key = GlobalKey();
 
 
-class Curriculumn extends StatelessWidget {
-  const Curriculumn({super.key});
+class convo extends StatelessWidget {
+  const convo({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,14 +124,19 @@ class Curriculumn extends StatelessWidget {
               title: Text(
                 'ADVISING',
                 style: TextStyle(
-                    color: Color.fromARGB(255, 96, 96, 96), fontWeight: FontWeight.bold),
+                    color: Color.fromARGB(255, 255, 255, 255), fontWeight: FontWeight.bold),
               ),
               trailing: FaIcon(
                 FontAwesomeIcons.chevronRight,
                 color: Colors.white,
                 size: 20,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context)=> advising(),
+                ));
+              },
             ),
             ListTile(
               leading: FaIcon(
@@ -156,25 +172,18 @@ class Curriculumn extends StatelessWidget {
                 style: TextStyle(
                     color: Colors.white, fontWeight: FontWeight.bold),
               ),
-
               trailing: FaIcon(
                 FontAwesomeIcons.chevronRight,
                 color: Colors.white,
                 size: 20,
               ),
-
               onTap: () {
+
                 Navigator.of(context).pop();
-
-
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context)=> AdvisingRule(),
                 ));
 
-
-              },
-              onLongPress: (){
-                Navigator.of(context).pop();
               },
             ),
             ListTile(
@@ -186,14 +195,19 @@ class Curriculumn extends StatelessWidget {
               title: Text(
                 'GRADE REPORT',
                 style: TextStyle(
-                    color: Color.fromARGB(255, 96, 96, 96), fontWeight: FontWeight.bold),
+                    color: Colors.white, fontWeight: FontWeight.bold),
               ),
               trailing: FaIcon(
                 FontAwesomeIcons.chevronRight,
                 color: Colors.white,
                 size: 20,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context)=> GradeReport(),
+                ));
+              },
             ),
             ListTile(
               leading: FaIcon(
@@ -204,14 +218,19 @@ class Curriculumn extends StatelessWidget {
               title: Text(
                 'SEMESTER DROP',
                 style: TextStyle(
-                    color: Color.fromARGB(255, 96, 96, 96), fontWeight: FontWeight.bold),
+                    color: Colors.white, fontWeight: FontWeight.bold),
               ),
               trailing: FaIcon(
                 FontAwesomeIcons.chevronRight,
                 color: Colors.white,
                 size: 20,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context)=> Semesterdrop(),
+                ));
+              },
             ),
             ListTile(
               leading: FaIcon(
@@ -224,14 +243,20 @@ class Curriculumn extends StatelessWidget {
                 style: TextStyle(
                     color: Colors.white, fontWeight: FontWeight.bold),
               ),
-              /*
               trailing: FaIcon(
                 FontAwesomeIcons.chevronRight,
                 color: Colors.white,
                 size: 20,
               ),
-              */
-              //onTap: () {},
+              onTap: () {
+
+
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context)=> Curriculumn(),
+                ));
+
+              },
             ),
             ListTile(
               leading: FaIcon(
@@ -242,7 +267,7 @@ class Curriculumn extends StatelessWidget {
               title: Text(
                 'INSTALLEMNT PAYMENT',
                 style: TextStyle(
-                    color: Color.fromARGB(255, 96, 96, 96),
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 15.1),
               ),
@@ -251,7 +276,12 @@ class Curriculumn extends StatelessWidget {
                 color: Colors.white,
                 size: 20,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context)=> Installmentpayment(),
+                ));
+              },
             ),
             ListTile(
               leading: FaIcon(
@@ -262,7 +292,7 @@ class Curriculumn extends StatelessWidget {
               title: Text(
                 'MY ACCOUNT LEADGER',
                 style: TextStyle(
-                    color: Color.fromARGB(255, 96, 96, 96),
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 15.5),
               ),
@@ -271,7 +301,12 @@ class Curriculumn extends StatelessWidget {
                 color: Colors.white,
                 size: 20,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context)=> Myaccleadger(),
+                ));
+              },
             ),
             ListTile(
               leading: FaIcon(
@@ -282,14 +317,19 @@ class Curriculumn extends StatelessWidget {
               title: Text(
                 'OFFERED COURSES',
                 style: TextStyle(
-                    color: Color.fromARGB(255, 96, 96, 96), fontWeight: FontWeight.bold),
+                    color: Colors.white, fontWeight: FontWeight.bold),
               ),
               trailing: FaIcon(
                 FontAwesomeIcons.chevronRight,
                 color: Colors.white,
                 size: 20,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context)=> Offeredcourse(),
+                ));
+              },
             ),
             ListTile(
               leading: FaIcon(
@@ -300,14 +340,19 @@ class Curriculumn extends StatelessWidget {
               title: Text(
                 'DEGREE REVIEW',
                 style: TextStyle(
-                    color: Color.fromARGB(255, 96, 96, 96), fontWeight: FontWeight.bold),
+                    color: Colors.white, fontWeight: FontWeight.bold),
               ),
               trailing: FaIcon(
                 FontAwesomeIcons.chevronRight,
                 color: Colors.white,
                 size: 20,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context)=> Degreereview(),
+                ));
+              },
             ),
             ListTile(
               leading: FaIcon(
@@ -318,14 +363,19 @@ class Curriculumn extends StatelessWidget {
               title: Text(
                 'FACULTY EVALUATION',
                 style: TextStyle(
-                    color: Color.fromARGB(255, 96, 96, 96), fontWeight: FontWeight.bold),
+                    color: Colors.white, fontWeight: FontWeight.bold),
               ),
               trailing: FaIcon(
                 FontAwesomeIcons.chevronRight,
                 color: Colors.white,
                 size: 20,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context)=> Facevaluation(),
+                ));
+              },
             ),
             ListTile(
               leading: FaIcon(
@@ -336,14 +386,16 @@ class Curriculumn extends StatelessWidget {
               title: Text(
                 'CONVOCATION APPLY',
                 style: TextStyle(
-                    color: Color.fromARGB(255, 96, 96, 96), fontWeight: FontWeight.bold),
+                    color: Colors.white, fontWeight: FontWeight.bold),
               ),
-              trailing: FaIcon(
-                FontAwesomeIcons.chevronRight,
-                color: Colors.white,
-                size: 20,
-              ),
-              onTap: () {},
+              /*
+                trailing: FaIcon(
+                  FontAwesomeIcons.chevronRight,
+                  color: Colors.white,
+                  size: 20,
+                ),
+                */
+              // onTap: () {},
             ),
             ListTile(
               leading: FaIcon(
@@ -354,66 +406,66 @@ class Curriculumn extends StatelessWidget {
               title: Text(
                 'UPLOAD DOCUMENT',
                 style: TextStyle(
-                    color: Color.fromARGB(255, 96, 96, 96), fontWeight: FontWeight.bold),
+                    color: Colors.white, fontWeight: FontWeight.bold),
               ),
               trailing: FaIcon(
                 FontAwesomeIcons.chevronRight,
                 color: Colors.white,
                 size: 20,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context)=> Uploaddoc(),
+                ));
+              },
             ),
+
           ],
         ),
       ),
 
-      body:
-      Column(
-        children: [
+       body: Column(
+         children: [
 
-          Container(
-            height: 25,
 
-          ),Divider(
-            height: 20,
-            thickness: 0.3,
-            color: Colors.black,
-          ),Container(
-            height: 30,
+           Container(
+             height: 25,
 
-          ),
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
+           ),Divider(
+             height: 20,
+             thickness: 0.3,
+             color: Colors.black,
+           ),Container(
+             height: 30,
 
-                  margin: EdgeInsets.only(right: 3),height: 40,width: 230,
-                  child: ElevatedButton.icon(onPressed: () {},
-                    style: ElevatedButton.styleFrom(backgroundColor: Colors.green,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7))),
-                    label: Text("Show My Program Curriculumn",style: TextStyle(color: Colors.white,fontSize: 12),),
-                      icon: FaIcon(FontAwesomeIcons.bookOpen,color: Colors.white,size: 10,),),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 4),height: 40,width: 150,
-                  child: ElevatedButton.icon(onPressed: (){
+           ),
+           Container(
+             margin: EdgeInsets.all(12),
+             child: Text("If you want to change your Name,Father's Name and Mother's Name. Please contact the Registrar’s Office with the relevant documents. You may call (09666775577 ext. 155, 263, 380) or come physically to the Registrar’s office (room # 409/410).",
+               style: TextStyle(color: Colors.blue[800],fontSize: 18,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+           ),
+           Container(
+             margin: EdgeInsets.all(12),
+             child: Text("As your required credit for the degree is not completed yet, you can not apply for the convocation. Thanks.",
+               style: TextStyle(color: Colors.red,fontSize: 18,fontWeight: FontWeight.bold),textAlign: TextAlign.left,),
+           ),
+           Container(
+             alignment: Alignment.topLeft,
+             margin: EdgeInsets.all( 10),
+             child: ElevatedButton.icon(onPressed: () {},
+               style:ElevatedButton.styleFrom(backgroundColor: Colors.orange,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7))),
+               label: Text("Notice & User Manual",style: TextStyle(color: Colors.white,fontSize: 13),),
+               icon: FaIcon(FontAwesomeIcons.solidBell,color: Colors.white,size: 15,),),
+           )
+         ],
+       )
 
-                  },
-                    style: ElevatedButton.styleFrom(backgroundColor: Colors.blue[800],shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7))),
-                    label: Text("Show Blue Book",style: TextStyle(color: Colors.white,fontSize: 12),),
-                    icon: FaIcon(FontAwesomeIcons.book,color: Colors.white,size: 10,),),
-                )
-              ],
-            ),
-          ),
-          Container(
-            height: 30,
-
-          ),
-        ],
-      )
 
 
     );
   }
+
 }
+
+

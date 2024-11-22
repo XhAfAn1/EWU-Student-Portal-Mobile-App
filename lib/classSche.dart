@@ -2,6 +2,7 @@
 
 import 'package:ewu_portal/Advising_rule.dart';
 import 'package:ewu_portal/Profile.dart';
+import 'package:ewu_portal/advising.dart';
 import 'package:ewu_portal/main.dart';
 import 'package:ewu_portal/provider/MyHomePageProvider.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,17 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+
+import 'DegreeReview.dart';
+import 'FacEvaluation.dart';
+import 'GradeReport.dart';
+import 'InstallmentPayment.dart';
+import 'MyAccLeadger.dart';
+import 'OfferedCourse.dart';
+import 'SemesterDrop.dart';
+import 'UploadDoc.dart';
+import 'convo.dart';
+import 'curriculumn/Curriculumn.dart';
 
 
 GlobalKey<ScaffoldState> key = GlobalKey();
@@ -113,14 +125,19 @@ class classSche extends StatelessWidget {
                 title: Text(
                   'ADVISING',
                   style: TextStyle(
-                      color: Color.fromARGB(255, 96, 96, 96), fontWeight: FontWeight.bold),
+                      color: Color.fromARGB(255, 255, 255, 255), fontWeight: FontWeight.bold),
                 ),
                 trailing: FaIcon(
                   FontAwesomeIcons.chevronRight,
                   color: Colors.white,
                   size: 20,
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context)=> advising(),
+                  ));
+                },
               ),
               ListTile(
                 leading: FaIcon(
@@ -131,14 +148,15 @@ class classSche extends StatelessWidget {
                 title: Text(
                   'MY CLASS SCHEDULE',
                   style: TextStyle(
-                      color: Color.fromARGB(255, 96, 96, 96), fontWeight: FontWeight.bold),
+                      color: Color.fromARGB(255, 255, 255, 255), fontWeight: FontWeight.bold),
                 ),
+                /*
                 trailing: FaIcon(
                   FontAwesomeIcons.chevronRight,
                   color: Colors.white,
                   size: 20,
-                ),
-                onTap: () {},
+                ),*/
+               // onTap: () {},
               ),
               ListTile(
                 leading: FaIcon(
@@ -151,25 +169,18 @@ class classSche extends StatelessWidget {
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
-
                 trailing: FaIcon(
                   FontAwesomeIcons.chevronRight,
                   color: Colors.white,
                   size: 20,
                 ),
-
                 onTap: () {
+
                   Navigator.of(context).pop();
-
-
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context)=> AdvisingRule(),
                   ));
 
-
-                },
-                onLongPress: (){
-                  Navigator.of(context).pop();
                 },
               ),
               ListTile(
@@ -181,14 +192,19 @@ class classSche extends StatelessWidget {
                 title: Text(
                   'GRADE REPORT',
                   style: TextStyle(
-                      color: Color.fromARGB(255, 96, 96, 96), fontWeight: FontWeight.bold),
+                      color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 trailing: FaIcon(
                   FontAwesomeIcons.chevronRight,
                   color: Colors.white,
                   size: 20,
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context)=> GradeReport(),
+                  ));
+                },
               ),
               ListTile(
                 leading: FaIcon(
@@ -199,14 +215,19 @@ class classSche extends StatelessWidget {
                 title: Text(
                   'SEMESTER DROP',
                   style: TextStyle(
-                      color: Color.fromARGB(255, 96, 96, 96), fontWeight: FontWeight.bold),
+                      color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 trailing: FaIcon(
                   FontAwesomeIcons.chevronRight,
                   color: Colors.white,
                   size: 20,
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context)=> Semesterdrop(),
+                  ));
+                },
               ),
               ListTile(
                 leading: FaIcon(
@@ -219,14 +240,20 @@ class classSche extends StatelessWidget {
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
-                /*
-              trailing: FaIcon(
-                FontAwesomeIcons.chevronRight,
-                color: Colors.white,
-                size: 20,
-              ),
-              */
-                //onTap: () {},
+                trailing: FaIcon(
+                  FontAwesomeIcons.chevronRight,
+                  color: Colors.white,
+                  size: 20,
+                ),
+                onTap: () {
+
+
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context)=> Curriculumn(),
+                  ));
+
+                },
               ),
               ListTile(
                 leading: FaIcon(
@@ -237,7 +264,7 @@ class classSche extends StatelessWidget {
                 title: Text(
                   'INSTALLEMNT PAYMENT',
                   style: TextStyle(
-                      color: Color.fromARGB(255, 96, 96, 96),
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 15.1),
                 ),
@@ -246,7 +273,12 @@ class classSche extends StatelessWidget {
                   color: Colors.white,
                   size: 20,
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context)=> Installmentpayment(),
+                  ));
+                },
               ),
               ListTile(
                 leading: FaIcon(
@@ -257,7 +289,7 @@ class classSche extends StatelessWidget {
                 title: Text(
                   'MY ACCOUNT LEADGER',
                   style: TextStyle(
-                      color: Color.fromARGB(255, 96, 96, 96),
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 15.5),
                 ),
@@ -266,7 +298,12 @@ class classSche extends StatelessWidget {
                   color: Colors.white,
                   size: 20,
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context)=> Myaccleadger(),
+                  ));
+                },
               ),
               ListTile(
                 leading: FaIcon(
@@ -277,14 +314,19 @@ class classSche extends StatelessWidget {
                 title: Text(
                   'OFFERED COURSES',
                   style: TextStyle(
-                      color: Color.fromARGB(255, 96, 96, 96), fontWeight: FontWeight.bold),
+                      color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 trailing: FaIcon(
                   FontAwesomeIcons.chevronRight,
                   color: Colors.white,
                   size: 20,
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context)=> Offeredcourse(),
+                  ));
+                },
               ),
               ListTile(
                 leading: FaIcon(
@@ -295,14 +337,19 @@ class classSche extends StatelessWidget {
                 title: Text(
                   'DEGREE REVIEW',
                   style: TextStyle(
-                      color: Color.fromARGB(255, 96, 96, 96), fontWeight: FontWeight.bold),
+                      color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 trailing: FaIcon(
                   FontAwesomeIcons.chevronRight,
                   color: Colors.white,
                   size: 20,
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context)=> Degreereview(),
+                  ));
+                },
               ),
               ListTile(
                 leading: FaIcon(
@@ -313,14 +360,19 @@ class classSche extends StatelessWidget {
                 title: Text(
                   'FACULTY EVALUATION',
                   style: TextStyle(
-                      color: Color.fromARGB(255, 96, 96, 96), fontWeight: FontWeight.bold),
+                      color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 trailing: FaIcon(
                   FontAwesomeIcons.chevronRight,
                   color: Colors.white,
                   size: 20,
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context)=> Facevaluation(),
+                  ));
+                },
               ),
               ListTile(
                 leading: FaIcon(
@@ -331,14 +383,25 @@ class classSche extends StatelessWidget {
                 title: Text(
                   'CONVOCATION APPLY',
                   style: TextStyle(
-                      color: Color.fromARGB(255, 96, 96, 96), fontWeight: FontWeight.bold),
+                      color: Color.fromARGB(255, 255, 255, 255), fontWeight: FontWeight.bold),
                 ),
                 trailing: FaIcon(
                   FontAwesomeIcons.chevronRight,
                   color: Colors.white,
                   size: 20,
                 ),
-                onTap: () {},
+                onTap: () {
+
+
+
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context)=> convo(),
+                  ));
+
+
+
+                },
               ),
               ListTile(
                 leading: FaIcon(
@@ -349,14 +412,19 @@ class classSche extends StatelessWidget {
                 title: Text(
                   'UPLOAD DOCUMENT',
                   style: TextStyle(
-                      color: Color.fromARGB(255, 96, 96, 96), fontWeight: FontWeight.bold),
+                      color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 trailing: FaIcon(
                   FontAwesomeIcons.chevronRight,
                   color: Colors.white,
                   size: 20,
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context)=> Uploaddoc(),
+                  ));
+                },
               ),
             ],
           ),
