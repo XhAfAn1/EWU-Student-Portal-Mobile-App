@@ -20,4 +20,5 @@ class MyHomePageProvider extends ChangeNotifier {
     this.data = courseData.fromJson(mJson);
     this.notifyListeners(); // for callback to view
   }
+
 }

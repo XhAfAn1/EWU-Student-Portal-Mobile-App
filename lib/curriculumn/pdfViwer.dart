@@ -434,7 +434,8 @@ class pdfView extends StatelessWidget {
           ),
         ),
 
-        body: showpdf(a,src)
+        body: showpdf(a)
+
         //SfPdfViewer.asset(src),
         //SfPdfViewer.network(src)
 
@@ -442,7 +443,7 @@ class pdfView extends StatelessWidget {
     );
   }
 
-  showpdf(int a, String src) {
+  showpdf(int a){
     if(a==1){
       return SfPdfViewer.network(src);
 

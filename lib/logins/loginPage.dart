@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:ewu_portal/logins/mainL.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -123,7 +125,7 @@ class _loginPageState extends State<loginPage> {
                         margin: EdgeInsets.only(left: 10,right: 10,),
                           child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor:Colors.blue[400],elevation: 0 ),
                               onPressed: (){
-                                msg="Invalid userID and Password";
+
                                 setState(() async {
 
                                   uid=uidcontroler.text;
@@ -146,7 +148,16 @@ class _loginPageState extends State<loginPage> {
                                           ));
                                     }
                                     else {
-                                      print(msg);
+                                      msg="Invalid userID and Password";
+                                      Timer(Duration(seconds: 1),(){
+                                      Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                      builder: (context) =>
+                                      loginPage(),
+
+                                      ));
+                                      });
+
                                     }
                                 }
                                 );
