@@ -41,8 +41,7 @@ class profile extends StatelessWidget {
               Navigator.of(context).pop();
 
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context)=> Home(
-                ),
+                builder: (context)=> Home(),
 
 
               ));

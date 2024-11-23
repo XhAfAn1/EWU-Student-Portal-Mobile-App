@@ -11,7 +11,6 @@ import 'package:ewu_portal/convo.dart';
 import 'package:ewu_portal/curriculumn/Curriculumn.dart';
 import 'package:ewu_portal/Profile.dart';
 import 'package:ewu_portal/classSche.dart';
-import 'package:ewu_portal/logins/createUser.dart';
 import 'package:ewu_portal/logins/loginPage.dart';
 import 'package:ewu_portal/logins/mainL.dart';
 import 'package:flutter/material.dart';
@@ -39,10 +38,22 @@ void main() => runApp(MaterialApp(
 
     ));
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
 
   @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  @override
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    bool _isVisible = true;
+    DismissableContainer();
+  }
   Widget build(BuildContext context) {
     return Scaffold(
         key: key,
@@ -462,81 +473,58 @@ class Home extends StatelessWidget {
           ),
         ),
 
-        body:StackExample()
+        body:  DismissableContainer(),
+
+
 
         );
   }
 }
 
-class StackExample extends StatefulWidget {
+class DismissableContainer extends StatefulWidget {
   @override
-  _StackExampleState createState() => _StackExampleState();
+  _DismissableContainerState createState() => _DismissableContainerState();
 }
 
-class _StackExampleState extends State<StackExample> {
-  List<Widget> _stackWidgets = [];
+class _DismissableContainerState extends State<DismissableContainer> {
+  bool _isVisible = true;
 
   @override
-  void initState() {
-    super.initState();
-    _stackWidgets = [
-      Container(
-        margin: const EdgeInsets.all(10.0),
-        width: 800,
-        height: 50,
-        color: Color.fromARGB(255, 217, 237, 247),
-      ),
-      Container(
-        margin: const EdgeInsets.all(25.0),
-        width: 800,
-        height: 50,
-        child: Text(
-          'Welcome to East West University Student Portal!',
-          style: TextStyle(
-              color: Color.fromARGB(255, 49, 112, 169),
-              fontSize: 14,
-              fontWeight: FontWeight.bold),
-        ),
-      ),
-      Container(
-        margin: const EdgeInsets.all(12.0),
-        child: Builder(
-          builder: (context) {
-            return Container(
-              child: TextButton(
-                onPressed: () {
-                  _removeAllWidgets();
-                },
-                child: FaIcon(
-                  FontAwesomeIcons.close,
-                  color: Colors.black,
-                  size: 20,
-                ),
-              ),
-            );
-          },
-        ),
-      ),
-
-    ];
-  }
-
-  void _removeAllWidgets() {
-    setState(() {
-      _stackWidgets.clear();
-    });
-  }
-
   Widget build(BuildContext context) {
-    // Define the stack as a variable
-    Widget stack = Stack(
-      alignment: Alignment.topRight,
-      children: _stackWidgets,
-    );
-    // Use the stack variable in your widget tree
-
-    return stack;
+    return _isVisible
+        ? Container(
+      margin: EdgeInsets.all(10.0),
+      decoration: BoxDecoration(
+        color: Color.fromARGB(255, 217, 237, 247),
+        borderRadius: BorderRadius.circular(0),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Expanded(
+              child: Text('  Welcome to East West University Student Portal!',
+                style: TextStyle(
+                    color: Color.fromARGB(255, 49, 112, 169),
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold),textAlign: TextAlign.left,
+              ),
+            ),
+            IconButton(
+              icon: Icon(Icons.close, color: Colors.black),
+              onPressed: () {
+                setState(() {
+                  _isVisible = false;
+                });
+              },
+            ),
+          ],
+        ),
+      ),
+    )
+        : SizedBox.shrink(); // Empty space when container is hidden
   }
-}
 
+}
 

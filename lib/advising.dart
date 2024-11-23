@@ -446,10 +446,42 @@ class advising extends StatelessWidget {
 
             ),
             Container(
-              margin: EdgeInsets.all(12),
-              child: Text("Comming soon",
-                style: TextStyle(color: Colors.blue[800],fontSize: 18,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+              margin: EdgeInsets.all(8),
+              padding: EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 192, 57, 43),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              height: 100,
+              width: 450,
+              child: Center(
+                child: Text("YOUR ADVISING SCHEDULE NOT STARTED YET / ADVISING TIME IS OVER.",
+                  style: TextStyle(color: Colors.white,fontSize: 18,),textAlign: TextAlign.left,),
+              ),
             ),
+
+            ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 76, 165, 196),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
+              onPressed: (){}, child: Padding(
+                padding: const EdgeInsets.only(left: 30.0,right: 30),
+                child: Text("      Print Slip     ",
+                  style: TextStyle(color: Colors.white,fontSize: 18,),textAlign: TextAlign.left,),
+              ),),
+            ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 76, 165, 196),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
+              onPressed: (){}, child: Padding(
+                padding: const EdgeInsets.only(left: 30.0,right: 30),
+                child: Text("  Instructions   ",
+                  style: TextStyle(color: Colors.white,fontSize: 18,),textAlign: TextAlign.left,),
+              ),),
+            ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 76, 165, 196),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
+              onPressed: (){
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context)=> AdvisingRule(),
+                ));
+              }, child: Padding(
+                padding: const EdgeInsets.only(left: 30.0,right: 30),
+                child: Text("Advising Rules",
+                  style: TextStyle(color: Colors.white,fontSize: 18,),textAlign: TextAlign.left,),
+              ),),
 
 
           ],

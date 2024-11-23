@@ -457,7 +457,7 @@ class Curriculumn extends StatelessWidget {
                   margin: EdgeInsets.only(right: 3),height: 40,width: 230,
                   child: ElevatedButton.icon(onPressed: () {
 
-                    Navigator.of(context).pop();
+                    //Navigator.of(context).pop();
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (context)=> pdfView(2,"assets/cse.pdf")
                     ));
@@ -469,7 +469,7 @@ class Curriculumn extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(left: 4),height: 40,width: 150,
                   child: ElevatedButton.icon(onPressed: () {
-                    Navigator.of(context).pop();
+                   // Navigator.of(context).pop();
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (context)=> pdfView(1,"https://www.ewubd.edu/storage/app/media/Undergraduate%20Bulletin/ewuundergraduate-bulletin-14th-edition-doc-version.pdf"),
                     ));
