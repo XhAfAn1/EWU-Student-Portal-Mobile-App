@@ -457,6 +457,7 @@ class classSche extends StatelessWidget {
                         DataColumn(label: Text('Faculty Name',style: TextStyle(color:Colors.black),)),
                         DataColumn(label: Text('Semester',style: TextStyle(color:Colors.black),)),
                       ],
+
                       rows: provider.data!.result!.map((data) =>
                           DataRow(
 

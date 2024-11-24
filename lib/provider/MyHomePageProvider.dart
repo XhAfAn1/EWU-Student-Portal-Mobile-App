@@ -6,6 +6,7 @@ import 'package:ewu_portal/Datas/courseData.dart';
 class MyHomePageProvider extends ChangeNotifier {
    courseData? data;
 
+
   Future getData(context) async {
     // You can call an API to get data, once we've the data from API or any other flow... Following part would always be the same.
     // We forgot about one more important part .. lets do that first
@@ -20,5 +21,9 @@ class MyHomePageProvider extends ChangeNotifier {
     this.data = courseData.fromJson(mJson);
     this.notifyListeners(); // for callback to view
   }
+
+
+
+
 
 }

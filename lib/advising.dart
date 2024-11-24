@@ -7,10 +7,12 @@ import 'package:ewu_portal/Profile.dart';
 import 'package:ewu_portal/convo.dart';
 import 'package:ewu_portal/curriculumn/Curriculumn.dart';
 import 'package:ewu_portal/main.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:path/path.dart';
 
 import 'DegreeReview.dart';
 import 'GradeReport.dart';
@@ -442,7 +444,7 @@ class advising extends StatelessWidget {
               thickness: 0.3,
               color: Colors.black,
             ),Container(
-              height: 30,
+              height: 20,
 
             ),
             Container(
@@ -467,7 +469,10 @@ class advising extends StatelessWidget {
                   style: TextStyle(color: Colors.white,fontSize: 18,),textAlign: TextAlign.left,),
               ),),
             ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 76, 165, 196),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
-              onPressed: (){}, child: Padding(
+              onPressed: (){
+
+
+              }, child: Padding(
                 padding: const EdgeInsets.only(left: 30.0,right: 30),
                 child: Text("  Instructions   ",
                   style: TextStyle(color: Colors.white,fontSize: 18,),textAlign: TextAlign.left,),
@@ -491,7 +496,7 @@ class advising extends StatelessWidget {
 
     );
   }
-
+  
 }
 
 

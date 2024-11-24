@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:path/path.dart';
 
 import 'DegreeReview.dart';
 import 'FacEvaluation.dart';
@@ -24,6 +25,15 @@ GlobalKey<ScaffoldState> key = GlobalKey();
 class profile extends StatelessWidget {
   const profile({super.key});
   @override
+
+  Future<void> refresh (){
+    prRld();
+    return Future.delayed(Duration(seconds: 1));
+  }
+  prRld() {
+    return profile();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
         key: key,
@@ -38,12 +48,10 @@ class profile extends StatelessWidget {
 
             ),
             onPressed: (){
-              Navigator.of(context).pop();
 
+              Navigator.of(context).pop();
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context)=> Home(),
-
-
               ));
 
             },
@@ -423,206 +431,210 @@ class profile extends StatelessWidget {
         ),
 
         body: Center(
-          child: ListView(
-            children: [
-              Container(
-                height: 25,
-
-              ),Divider(
-                height: 20,
-                thickness: 0.3,
-                color: Colors.black,
-              ),Container(
-                height: 30,
-
-              ),
-              Column( children: [
+          child: RefreshIndicator(
+            onRefresh: refresh,
+            child: ListView(
+              children: [
                 Container(
-                margin: EdgeInsetsDirectional.all(20),
-                height: 500,
-                width: 380,
-                color: Color.fromARGB(255, 240, 244, 245),
-                child: Center(
-                  child: Column(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(vertical: 0),
-                        height: 280,
-                        width: 200,
-                        child: Image.asset(
-                          "assets/bateman.jpg",
+                  height: 25,
 
-                        ) ,
-                      ),
-                      Container(
-                        alignment: Alignment.center,
-                        child:  Column(
-                          children: [
-                            ListTile( title: Text(getpfName(), textAlign: TextAlign.center,style:
-                            TextStyle(color: Color.fromARGB(255, 74, 72, 72),fontSize: 20,fontWeight: FontWeight.bold),),),
-                            ListTile(
-                              title: Text("Student ID: "+ getId() + "\n Unique ID: 00922305101045\n Program: CSE\n Department: CSE\n Credits completed: 63\n CGPA: 4.20", textAlign: TextAlign.center,style:
-                              TextStyle(color: Colors.black45,fontSize: 14,fontWeight: FontWeight.bold),),
-                            ),
-                          ],
-                        )
+                ),Divider(
+                  height: 20,
+                  thickness: 0.3,
+                  color: Colors.black,
+                ),Container(
+                  height: 30,
+
+                ),
+                Column( children: [
+                  Container(
+                  margin: EdgeInsetsDirectional.all(20),
+                  height: 500,
+                  width: 380,
+                  color: Color.fromARGB(255, 240, 244, 245),
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(vertical: 0),
+                          height: 280,
+                          width: 200,
+                          child: Image.asset(
+                            "assets/bateman.jpg",
+
+                          ) ,
+                        ),
+                        Container(
+                          alignment: Alignment.center,
+                          child:  Column(
+                            children: [
+                              ListTile( title: Text(getpfName(), textAlign: TextAlign.center,style:
+                              TextStyle(color: Color.fromARGB(255, 74, 72, 72),fontSize: 20,fontWeight: FontWeight.bold),),),
+                              ListTile(
+                                title: Text("Student ID: "+ getId() + "\n Unique ID: 00922305101045\n Program: CSE\n Department: CSE\n Credits completed: 63\n CGPA: 4.20", textAlign: TextAlign.center,style:
+                                TextStyle(color: Colors.black45,fontSize: 14,fontWeight: FontWeight.bold),),
+                              ),
+                            ],
+                          )
 
 
-                      ),
+                        ),
 
-                    ],
+                      ],
+                    ),
                   ),
+
+
                 ),
 
 
-              ),
+                ]),
 
 
-              ]),
+                Container(
+                  margin:EdgeInsets.only(left: 5),
+                  //margin: EdgeInsetsDirectional.all(5),
+                  child: Column(
+                    children: [
+                      ListTile(
+                        title: Text("CONTACT INFORMATION",style:
+                        TextStyle(color: Colors.grey[700],fontSize: 18,fontWeight: FontWeight.bold),),
+                      ),
 
+                      ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                        leading:FaIcon(FontAwesomeIcons.phone,size: 18,color: Colors.green,),
+                        title: Text("01839228924",style:
+                        TextStyle(color: Colors.grey[700],fontSize: 14),),
+                      ),
+                      SizedBox(height: 0),
+                      ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                        leading:FaIcon(FontAwesomeIcons.envelope,size: 18,color: Colors.blue,),
+                        title: Text("2022-3-60-045@std.ewubd.edu",style:
+                        TextStyle(color: Colors.grey[700],fontSize: 14),),
+                      ),
+                      SizedBox(height: 15),
+                      ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                        title: Text("PRESENT ADDRESS",style:
+                        TextStyle(color: Colors.grey[700],fontSize: 18,fontWeight: FontWeight.bold),),
+                      ),
+                      ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                        title: Text("House # 109 (6th Floor),Agamashi Lane,Bongshal,Dhaka",style:
+                        TextStyle(color: Colors.grey[700],fontSize: 14),),
+                      ),
+                      SizedBox(height: 15),
+                      ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                        title: Text("PARMANET ADDRESS",style:
+                        TextStyle(color: Colors.grey[700],fontSize: 18,fontWeight: FontWeight.bold),),
+                      ),
+                      ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                        title: Text("Wayne Manor, 1007 Mountain Drive, Gotham",style:
+                        TextStyle(color: Colors.grey[700],fontSize: 14),),
+                      ),
+                      SizedBox(height: 15),
+                      ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
+                        title: Text("OTHER DETAILS",style:
+                        TextStyle(color: Colors.grey[700],fontSize: 18,fontWeight: FontWeight.bold),),
+                      ),
+                      SizedBox(height: 5,),
 
-              Container(
-                margin:EdgeInsets.only(left: 5),
-                //margin: EdgeInsetsDirectional.all(5),
-                child: Column(
-                  children: [
-                    ListTile(
-                      title: Text("CONTACT INFORMATION",style:
-                      TextStyle(color: Colors.grey[700],fontSize: 18,fontWeight: FontWeight.bold),),
-                    ),
-
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      leading:FaIcon(FontAwesomeIcons.phone,size: 18,color: Colors.green,),
-                      title: Text("01839228924",style:
-                      TextStyle(color: Colors.grey[700],fontSize: 14),),
-                    ),
-                    SizedBox(height: 0),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      leading:FaIcon(FontAwesomeIcons.envelope,size: 18,color: Colors.blue,),
-                      title: Text("2022-3-60-045@std.ewubd.edu",style:
-                      TextStyle(color: Colors.grey[700],fontSize: 14),),
-                    ),
-                    SizedBox(height: 15),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      title: Text("PRESENT ADDRESS",style:
-                      TextStyle(color: Colors.grey[700],fontSize: 18,fontWeight: FontWeight.bold),),
-                    ),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      title: Text("House # 109 (6th Floor),Agamashi Lane,Bongshal,Dhaka",style:
-                      TextStyle(color: Colors.grey[700],fontSize: 14),),
-                    ),
-                    SizedBox(height: 15),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      title: Text("PARMANET ADDRESS",style:
-                      TextStyle(color: Colors.grey[700],fontSize: 18,fontWeight: FontWeight.bold),),
-                    ),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      title: Text("Wayne Manor, 1007 Mountain Drive, Gotham",style:
-                      TextStyle(color: Colors.grey[700],fontSize: 14),),
-                    ),
-                    SizedBox(height: 15),
-                    ListTile( visualDensity: VisualDensity(horizontal: 0, vertical: -4),
-                      title: Text("OTHER DETAILS",style:
-                      TextStyle(color: Colors.grey[700],fontSize: 18,fontWeight: FontWeight.bold),),
-                    ),
-                    SizedBox(height: 5,),
-
-                    Container(
-                      height: 60, width: 1200, color: Color.fromARGB(255, 240, 244, 245),
-                      child: Container( margin: EdgeInsets.only(top: 20,left: 20),
-                        child:Text("Admitted Semester",style:
-                        TextStyle(color: Colors.grey[700],fontSize: 16,fontWeight: FontWeight.bold),),
-                      )
-                    ),
-                    Container(
-                        height: 60, width: 1200, color: Color.fromARGB(255, 248, 250, 250),
-                        child: Container(
-                          margin: EdgeInsets.only(top: 20,left: 20),
-                          child:Text("Fall 2022",style:
-                          TextStyle(color: Colors.grey[700],fontSize: 16,),),
-                        )
-                    ),
-
-                    Container(
+                      Container(
                         height: 60, width: 1200, color: Color.fromARGB(255, 240, 244, 245),
                         child: Container( margin: EdgeInsets.only(top: 20,left: 20),
-                          child:Text("Date of Birth",style:
+                          child:Text("Admitted Semester",style:
                           TextStyle(color: Colors.grey[700],fontSize: 16,fontWeight: FontWeight.bold),),
                         )
-                    ),
-                    Container(
-                        height: 60, width: 1200, color: Color.fromARGB(255, 248, 250, 250),
-                        child: Container(
-                          margin: EdgeInsets.only(top: 20,left: 20),
-                          child:Text("29-01-2001",style:
-                          TextStyle(color: Colors.grey[700],fontSize: 16,),),
-                        )
-                    ),
+                      ),
+                      Container(
+                          height: 60, width: 1200, color: Color.fromARGB(255, 248, 250, 250),
+                          child: Container(
+                            margin: EdgeInsets.only(top: 20,left: 20),
+                            child:Text("Fall 2022",style:
+                            TextStyle(color: Colors.grey[700],fontSize: 16,),),
+                          )
+                      ),
 
-                    Container(
-                        height: 60, width: 1200, color: Color.fromARGB(255, 240, 244, 245),
-                        child: Container( margin: EdgeInsets.only(top: 20,left: 20),
-                          child:Text("Blood Group",style:
-                          TextStyle(color: Colors.grey[700],fontSize: 16,fontWeight: FontWeight.bold),),
-                        )
-                    ),
-                    Container(
-                        height: 60, width: 1200, color: Color.fromARGB(255, 248, 250, 250),
-                        child: Container(
-                          margin: EdgeInsets.only(top: 20,left: 20),
-                          child:Text("A+",style:
-                          TextStyle(color: Colors.grey[700],fontSize: 16,),),
-                        )
-                    ),
+                      Container(
+                          height: 60, width: 1200, color: Color.fromARGB(255, 240, 244, 245),
+                          child: Container( margin: EdgeInsets.only(top: 20,left: 20),
+                            child:Text("Date of Birth",style:
+                            TextStyle(color: Colors.grey[700],fontSize: 16,fontWeight: FontWeight.bold),),
+                          )
+                      ),
+                      Container(
+                          height: 60, width: 1200, color: Color.fromARGB(255, 248, 250, 250),
+                          child: Container(
+                            margin: EdgeInsets.only(top: 20,left: 20),
+                            child:Text("29-01-2001",style:
+                            TextStyle(color: Colors.grey[700],fontSize: 16,),),
+                          )
+                      ),
 
-
-                    Container(
-                        height: 60, width: 1200, color: Color.fromARGB(255, 240, 244, 245),
-                        child: Container( margin: EdgeInsets.only(top: 20,left: 20),
-                          child:Text("Marital Status",style:
-                          TextStyle(color: Colors.grey[700],fontSize: 16,fontWeight: FontWeight.bold),),
-                        )
-                    ),
-                    Container(
-                        height: 60, width: 1200, color: Color.fromARGB(255, 248, 250, 250),
-                        child: Container(
-                          margin: EdgeInsets.only(top: 20,left: 20),
-                          child:Text("Single",style:
-                          TextStyle(color: Colors.grey[700],fontSize: 16,),),
-                        )
-                    ),
-
-                    Container(
-                        height: 60, width: 1200, color: Color.fromARGB(255, 240, 244, 245),
-                        child: Container( margin: EdgeInsets.only(top: 20,left: 20),
-                          child:Text("Advisor",style:
-                          TextStyle(color: Colors.grey[700],fontSize: 16,fontWeight: FontWeight.bold),),
-                        )
-                    ),
-                    Container(
-                        height: 90, width: 1200, color: Color.fromARGB(255, 248, 250, 250),
-                        child: Container(
-                          margin: EdgeInsets.only(top: 20,left: 20),
-                          child:Text("Dr. Md. Tauhid Bin Iqbal(DTBI) \ntauhid.iqbal@ewubd.edu",style:
-                          TextStyle(color: Colors.grey[700],fontSize: 16,),),
-                        )
-                    ),
+                      Container(
+                          height: 60, width: 1200, color: Color.fromARGB(255, 240, 244, 245),
+                          child: Container( margin: EdgeInsets.only(top: 20,left: 20),
+                            child:Text("Blood Group",style:
+                            TextStyle(color: Colors.grey[700],fontSize: 16,fontWeight: FontWeight.bold),),
+                          )
+                      ),
+                      Container(
+                          height: 60, width: 1200, color: Color.fromARGB(255, 248, 250, 250),
+                          child: Container(
+                            margin: EdgeInsets.only(top: 20,left: 20),
+                            child:Text("A+",style:
+                            TextStyle(color: Colors.grey[700],fontSize: 16,),),
+                          )
+                      ),
 
 
-                  ],
+                      Container(
+                          height: 60, width: 1200, color: Color.fromARGB(255, 240, 244, 245),
+                          child: Container( margin: EdgeInsets.only(top: 20,left: 20),
+                            child:Text("Marital Status",style:
+                            TextStyle(color: Colors.grey[700],fontSize: 16,fontWeight: FontWeight.bold),),
+                          )
+                      ),
+                      Container(
+                          height: 60, width: 1200, color: Color.fromARGB(255, 248, 250, 250),
+                          child: Container(
+                            margin: EdgeInsets.only(top: 20,left: 20),
+                            child:Text("Single",style:
+                            TextStyle(color: Colors.grey[700],fontSize: 16,),),
+                          )
+                      ),
+
+                      Container(
+                          height: 60, width: 1200, color: Color.fromARGB(255, 240, 244, 245),
+                          child: Container( margin: EdgeInsets.only(top: 20,left: 20),
+                            child:Text("Advisor",style:
+                            TextStyle(color: Colors.grey[700],fontSize: 16,fontWeight: FontWeight.bold),),
+                          )
+                      ),
+                      Container(
+                          height: 90, width: 1200, color: Color.fromARGB(255, 248, 250, 250),
+                          child: Container(
+                            margin: EdgeInsets.only(top: 20,left: 20),
+                            child:Text("Dr. Md. Tauhid Bin Iqbal(DTBI) \ntauhid.iqbal@ewubd.edu",style:
+                            TextStyle(color: Colors.grey[700],fontSize: 16,),),
+                          )
+                      ),
 
 
-                )
-              ),
+                    ],
 
-            ],
 
+                  )
+                ),
+
+              ],
+
+            ),
           ),
         ),
 
 
     );
   }
+
 }
 
 String getpfName(){

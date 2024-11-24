@@ -11,7 +11,7 @@ class courseData {
     if (json['result'] != null) {
       result = <Result>[];
       json['result'].forEach((v) {
-        result!.add(new Result.fromJson(v));
+          result!.add(new Result.fromJson(v));
       });
     }
   }
@@ -50,6 +50,16 @@ class Result {
     credit = json['Credit'];
     facultyName = json['Faculty Name'];
     semester = json['Semester'];
+  }
+
+  Result.filterJson(Map<String, dynamic> json) {
+    if(json['Semester']=="Fall24")
+    {serial = json['Serial'];
+    course = json['Course'];
+    section = json['Section'];
+    credit = json['Credit'];
+    facultyName = json['Faculty Name'];
+    semester = json['Semester'];}
   }
 
   Map<String, dynamic> toJson() {

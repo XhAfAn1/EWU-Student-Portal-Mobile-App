@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:ewu_portal/Advising_rule.dart';
 import 'package:ewu_portal/DegreeReview.dart';
 import 'package:ewu_portal/GradeReport.dart';
@@ -45,16 +47,25 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
+
+
+
 class _HomeState extends State<Home> {
   @override
-@override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    bool _isVisible = true;
-    DismissableContainer();
+
+  Future<void> refresh (){
+    Timer(const Duration(seconds: 1), truMsg);
+    return Future.delayed(Duration(seconds: 1));
+  }void truMsg() {
+    setState(() {
+      isVisible = true;
+    });
   }
+
+  bool isVisible = true;
+
   Widget build(BuildContext context) {
+
     return Scaffold(
         key: key,
         appBar: AppBar(
@@ -67,7 +78,7 @@ class _HomeState extends State<Home> {
               alignment: Alignment.topLeft,
 
             ),
-          onPressed: (){
+          onPressed: (){truMsg();
           },
             style: ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
@@ -111,25 +122,24 @@ class _HomeState extends State<Home> {
 
               PopupMenuItem(child: TextButton.icon(icon: FaIcon(FontAwesomeIcons.user,size: 16,color: Colors.black,),onPressed:(){
 
-                Navigator.of(context).pop();
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context)=> profile(),
-                ));
-              } ,
-                label: Text("   Profile      ",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 16),),)
-              ),
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context)=> profile(),
+                    ));
+                  } ,
+                    label: Text("   Profile      ",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 16),),),
 
+
+              ),
 
               PopupMenuItem(child: TextButton.icon(icon: FaIcon(FontAwesomeIcons.signInAlt,size: 16,color: Colors.black,),onPressed:() async {
 
                 var sharedPref= await SharedPreferences.getInstance();
                 sharedPref.setBool(mainLState.KEYLOGIN, false);
 
-                Navigator.pop(context);
+               // Navigator.pop(context);
                 Navigator.of(context).pop(true);
-                //Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> Home(),),(route) => false);
-
-                Navigator.of(context).push(MaterialPageRoute(
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (context)=>loginPage(
                   ),
 
@@ -473,57 +483,63 @@ class _HomeState extends State<Home> {
           ),
         ),
 
-        body:  DismissableContainer(),
+        body:  // DismissableContainer(),
+      RefreshIndicator(
+        onRefresh: refresh,
+        child: ListView(
+          children: [ Column(
+            children: [Visibility(
+
+              visible: isVisible,
+              child: Container(
+                margin: EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 217, 237, 247),
+                  borderRadius: BorderRadius.circular(0),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10,right: 2,top: 2,bottom: 2),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Expanded(
+                        child: RichText(text:TextSpan(
+                          children: <TextSpan> [
+                            TextSpan(text: "Welcome ",style: TextStyle(
+                                color: Color.fromARGB(255, 49, 112, 169),
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold),),
+                            TextSpan(text:'to East West University Student Portal!',
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 49, 112, 169),
+                                  fontSize: 14,
+                                  ),
+                            )
+                          ]
+                        ))
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.close, color: Colors.black),
+                        onPressed: () {
+                          setState(() {
+                            isVisible = false;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),replacement: Container(
+              color: Colors.black,
+            ),
+            ),],
+          ),]
+        ),
+      )
 
 
 
         );
-  }
-}
-
-class DismissableContainer extends StatefulWidget {
-  @override
-  _DismissableContainerState createState() => _DismissableContainerState();
-}
-
-class _DismissableContainerState extends State<DismissableContainer> {
-  bool _isVisible = true;
-
-  @override
-  Widget build(BuildContext context) {
-    return _isVisible
-        ? Container(
-      margin: EdgeInsets.all(10.0),
-      decoration: BoxDecoration(
-        color: Color.fromARGB(255, 217, 237, 247),
-        borderRadius: BorderRadius.circular(0),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(
-              child: Text('  Welcome to East West University Student Portal!',
-                style: TextStyle(
-                    color: Color.fromARGB(255, 49, 112, 169),
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold),textAlign: TextAlign.left,
-              ),
-            ),
-            IconButton(
-              icon: Icon(Icons.close, color: Colors.black),
-              onPressed: () {
-                setState(() {
-                  _isVisible = false;
-                });
-              },
-            ),
-          ],
-        ),
-      ),
-    )
-        : SizedBox.shrink(); // Empty space when container is hidden
   }
 
 }
