@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:ewu_portal/Advising_rule.dart';
-import 'package:ewu_portal/DbHelper/DataBaseHelper.dart';
 import 'package:ewu_portal/Profile.dart';
 import 'package:ewu_portal/advising.dart';
 import 'package:ewu_portal/main.dart';
@@ -9,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'DbHelper/Course_Data.dart';
+import 'DbHelper/dbh.dart';
 import 'DegreeReview.dart';
 import 'FacEvaluation.dart';
 import 'GradeReport.dart';
@@ -24,7 +24,7 @@ import 'curriculumn/Curriculumn.dart';
 
 GlobalKey<ScaffoldState> key = GlobalKey();
 
-var q;
+int s=1;
 class classSche extends StatefulWidget {
   const classSche({super.key});
 
@@ -35,17 +35,30 @@ class classSche extends StatefulWidget {
 class _classScheState extends State<classSche> {
 
   List<Map<String, dynamic>> _courses = [];
+  List<Map<String, dynamic>> _filter = [];
 
   @override
 
 
-  void _fetchCourses() async {
-    var courses = await DatabaseHelper.instance.queryDatabase();
+  fetchCourses() async {
+    var courses = await dbh.instance.queryDatabase();
     setState(() {
       _courses = courses;
+      print(_filter);
     });
   }
-
+  filterCourses(String sem) async{
+    setState(() {
+      _filter = _courses.where((course) => course[dbh.semester].toString() == sem).toList();
+      print(_filter);
+    });
+  }
+@override
+  void initState() {
+    // TODO: implement initState
+   insertData();
+  fetchCourses();
+  }
   Widget build(BuildContext context) {
     return Scaffold(
         key: key,
@@ -447,44 +460,72 @@ class _classScheState extends State<classSche> {
           ),
         ),
 
-      body: Column(
+      body:
+
+
+      Column(
         children: [
+          Row(
+            children: [
+             Drop
+            ],
+          ),
           ElevatedButton(onPressed: () async{
-            await DatabaseHelper.instance.deleteTable();
-            insertData();
-            q= await DatabaseHelper.instance.queryDatabase();
-            print(q);
-            _fetchCourses();
+              await insertData();
+            var q= await dbh.instance.queryDatabase();
+            // print(q);
+              await fetchCourses();
           }, child: Text("Insert")),
+
           ElevatedButton(onPressed: () async{
-            await DatabaseHelper.instance.deleteall();
-            _fetchCourses();
+
+            filterCourses("Spring23");
+          }, child: Text("Show only Fall24")),
+
+
+
+
+          ElevatedButton(onPressed: () async{
+            await dbh.instance.deleteall();
+            await fetchCourses();
+            await filterCourses("");
           }, child: Text("Delete All")),
 
+             SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: DataTable(
+                border: TableBorder.all(color: Colors.black),
+                columns: [
+                DataColumn(label: Text("Serial")),
+                DataColumn(label: Text("Course")),
+                 DataColumn(label: Text("Section")),
+                 DataColumn(label: Text("Credit")),
+                DataColumn(label: Text("Timing")),
+                DataColumn(label: Text("Faculty Initial")),
+                 DataColumn(label: Text("Faculty")),
+                DataColumn(label: Text("Faculty Mail")),
+               //  DataColumn(label: Text("Semester")),
 
-          DataTable(columns: [
-            DataColumn(label: Text("Serial")),
-            DataColumn(label: Text("Course")),
-             DataColumn(label: Text("Section")),
-             DataColumn(label: Text("Credit")),
-            // DataColumn(label: Text("Faculty")),
-            // DataColumn(label: Text("Semester")),
+              ], rows: _filter.map((course) => DataRow(
+                  cells: [
+                    DataCell(Text((s++).toString())),
+                    DataCell(Text(course[dbh.course].toString())),
+                    DataCell(Text(course[dbh.section].toString())),
+                   DataCell(Text(course[dbh.credit].toString())),
+                    DataCell(Text(course[dbh.timing].toString())),
+                    DataCell(Text(course[dbh.facultyIni].toString())),
+                     DataCell(Text(course[dbh.faculty].toString())),
+                    DataCell(Text(course[dbh.facultyMail].toString())),
+                   //  DataCell(Text(course[dbh.semester].toString())),
+                  ],
+                ),
+              )
+                  .toList(),
 
-          ], rows: _courses.map((course) => DataRow(
-              cells: [
-                DataCell(Text(course[DatabaseHelper.columnId].toString())),
-                DataCell(Text(course[DatabaseHelper.course].toString())),
-                DataCell(Text(course[DatabaseHelper.section].toString())),
-               DataCell(Text(course[DatabaseHelper.credit].toString())),
-                // DataCell(Text(course[DatabaseHelper.facultyName].toString())),
-                // DataCell(Text(course[DatabaseHelper.semester].toString())),
-              ],
+
+              ),
             ),
-          )
-              .toList(),
 
-
-          )
         ],
       ),
 
@@ -494,127 +535,11 @@ class _classScheState extends State<classSche> {
 
 
 
-insertData() async {
-  await DatabaseHelper.instance.insert({
-    DatabaseHelper.course: "TestCourse1",DatabaseHelper.section: "TestCourse1",DatabaseHelper.credit: "TestCourse1"});
 
-}
-
-
-
-
-
-
-
-
-    /*
-      ChangeNotifierProvider<MyHomePageProvider>(
-        create: (context) => MyHomePageProvider(),
-        child: Consumer<MyHomePageProvider>(
-          builder: (context, provider, child) {
-            if (provider.data == null) {
-              provider.getData(context);
-              return Center(child: CircularProgressIndicator());
-            }
-            // when we have the json loaded... let's put the data into a data table widget
-            return Column(
-                children: [
-                  Align(
-                      alignment: Alignment.topLeft,
-                      child: Container(height: 100,width: 500,color: Colors.white,alignment: Alignment.topRight,)),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: DataTable(
-                      border: TableBorder.all(color: Colors.black),
-                      columns: [
-                        DataColumn(label: Text('Serial',style: TextStyle(color:Colors.black),)),
-                        DataColumn(label: Text('Course',style: TextStyle(color:Colors.black),)),
-                        DataColumn(label: Text('Section',style: TextStyle(color:Colors.black),)),
-                        DataColumn(label: Text('Credit',style: TextStyle(color:Colors.black),)),
-                        DataColumn(label: Text('Faculty Name',style: TextStyle(color:Colors.black),)),
-                        DataColumn(label: Text('Semester',style: TextStyle(color:Colors.black),)),
-                      ],
-
-                      rows: provider.data!.result!.map((data) =>
-                          DataRow(
-
-                              cells: [
-
-
-                                DataCell(Text(data.serial!)),
-                                DataCell(Text(data.course!)),
-                                DataCell(Text(data.section!)),
-                                DataCell(Text(data.credit!)),
-                                DataCell(Text(data.facultyName!)),
-                                DataCell(Text(data.semester!)),
-                              ])).toList(),
-                    ),
-                  ),
-                ],
-              );
-
-
-          },
-        ),
-      ),
-
-        Column(
-          children: [
-
-            Container(
-              height: 25,
-
-            ),Divider(
-              height: 20,
-              thickness: 0.3,
-              color: Colors.black,
-            ),Container(
-              height: 30,
-
-            ),
-            Container(
-              margin: EdgeInsets.all(20),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: DataTable(
-                  border: TableBorder.all(color: Colors.black),
-                    columns: [
-                      DataColumn(label: Text('Serial',style: TextStyle(color:Colors.black),)),
-                      DataColumn(label: Text('Course',style: TextStyle(color:Colors.black),)),
-                      DataColumn(label: Text('Section',style: TextStyle(color:Colors.black),)),
-                      DataColumn(label: Text('Credit',style: TextStyle(color:Colors.black),)),
-                      DataColumn(label: Text('Faculty Name',style: TextStyle(color:Colors.black),)),
-                ], rows: provider.data.result.map((data)=>).toList(),
-                ),
-              )
-            ),
-            Container(
-              height: 30,
-
-            ),
-          ],
-        )
-*/
 
 
 
 /*
-class CourseTime{
-  int serial;
-  String course;
-  int section;
-  String facultyN;
-
-
-  CourseTime({required this.serial,required this.course,required this.section,required this.facultyN,});
-   static List<CourseTime> getCourses(){
-    return <CourseTime> [
-      CourseTime(serial: 01, course: 'CSE 246', section: 05, facultyN: 'TM'),
-      CourseTime(serial: 02, course: 'CSE 302', section: 06, facultyN: 'MRJ'),
-      CourseTime(serial: 03, course: 'CSE 325', section: 05, facultyN: 'MMHM'),
-    ];
-}
-}
 
 
                       DataRow(cells: [
