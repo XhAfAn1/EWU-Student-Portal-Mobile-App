@@ -24,7 +24,6 @@ import '../SemesterDrop.dart';
 import '../UploadDoc.dart';
 import '../advising.dart';
 import '../classSche.dart';
-import 'package:file_picker/file_picker.dart';
 
 import '../convo.dart';
 

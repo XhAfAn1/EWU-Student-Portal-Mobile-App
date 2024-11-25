@@ -24,7 +24,7 @@ import '../OfferedCourse.dart';
 import '../SemesterDrop.dart';
 import '../UploadDoc.dart';
 import '../classSche.dart';
-import 'package:file_picker/file_picker.dart';
+
 
 import '../convo.dart';
 

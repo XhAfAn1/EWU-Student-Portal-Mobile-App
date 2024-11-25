@@ -7,7 +7,6 @@ import 'package:ewu_portal/Profile.dart';
 import 'package:ewu_portal/convo.dart';
 import 'package:ewu_portal/curriculumn/Curriculumn.dart';
 import 'package:ewu_portal/main.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';

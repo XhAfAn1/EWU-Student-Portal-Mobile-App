@@ -1,15 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:ewu_portal/Advising_rule.dart';
+import 'package:ewu_portal/DbHelper/DataBaseHelper.dart';
 import 'package:ewu_portal/Profile.dart';
 import 'package:ewu_portal/advising.dart';
 import 'package:ewu_portal/main.dart';
-import 'package:ewu_portal/provider/MyHomePageProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
 
 import 'DegreeReview.dart';
 import 'FacEvaluation.dart';
@@ -24,11 +23,29 @@ import 'curriculumn/Curriculumn.dart';
 
 
 GlobalKey<ScaffoldState> key = GlobalKey();
-String CheckSem="Fall24";
 
-class classSche extends StatelessWidget {
+var q;
+class classSche extends StatefulWidget {
   const classSche({super.key});
+
   @override
+  State<classSche> createState() => _classScheState();
+}
+
+class _classScheState extends State<classSche> {
+
+  List<Map<String, dynamic>> _courses = [];
+
+  @override
+
+
+  void _fetchCourses() async {
+    var courses = await DatabaseHelper.instance.queryDatabase();
+    setState(() {
+      _courses = courses;
+    });
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
         key: key,
@@ -430,7 +447,67 @@ class classSche extends StatelessWidget {
           ),
         ),
 
-      body:
+      body: Column(
+        children: [
+          ElevatedButton(onPressed: () async{
+            await DatabaseHelper.instance.deleteTable();
+            insertData();
+            q= await DatabaseHelper.instance.queryDatabase();
+            print(q);
+            _fetchCourses();
+          }, child: Text("Insert")),
+          ElevatedButton(onPressed: () async{
+            await DatabaseHelper.instance.deleteall();
+            _fetchCourses();
+          }, child: Text("Delete All")),
+
+
+          DataTable(columns: [
+            DataColumn(label: Text("Serial")),
+            DataColumn(label: Text("Course")),
+             DataColumn(label: Text("Section")),
+             DataColumn(label: Text("Credit")),
+            // DataColumn(label: Text("Faculty")),
+            // DataColumn(label: Text("Semester")),
+
+          ], rows: _courses.map((course) => DataRow(
+              cells: [
+                DataCell(Text(course[DatabaseHelper.columnId].toString())),
+                DataCell(Text(course[DatabaseHelper.course].toString())),
+                DataCell(Text(course[DatabaseHelper.section].toString())),
+               DataCell(Text(course[DatabaseHelper.credit].toString())),
+                // DataCell(Text(course[DatabaseHelper.facultyName].toString())),
+                // DataCell(Text(course[DatabaseHelper.semester].toString())),
+              ],
+            ),
+          )
+              .toList(),
+
+
+          )
+        ],
+      ),
+
+    );
+  }
+}
+
+
+
+insertData() async {
+  await DatabaseHelper.instance.insert({
+    DatabaseHelper.course: "TestCourse1",DatabaseHelper.section: "TestCourse1",DatabaseHelper.credit: "TestCourse1"});
+
+}
+
+
+
+
+
+
+
+
+    /*
       ChangeNotifierProvider<MyHomePageProvider>(
         create: (context) => MyHomePageProvider(),
         child: Consumer<MyHomePageProvider>(
@@ -480,7 +557,7 @@ class classSche extends StatelessWidget {
           },
         ),
       ),
-    /*
+
         Column(
           children: [
 
@@ -519,9 +596,7 @@ class classSche extends StatelessWidget {
         )
 */
 
-    );
-  }
-}
+
 
 /*
 class CourseTime{
