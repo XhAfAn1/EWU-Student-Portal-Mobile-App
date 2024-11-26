@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:io';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:ewu_portal/Advising_rule.dart';
 import 'package:ewu_portal/GradeReport.dart';
 import 'package:ewu_portal/Profile.dart';
@@ -25,9 +26,19 @@ import 'classSche.dart';
 GlobalKey<ScaffoldState> key = GlobalKey();
 
 
-class Semesterdrop extends StatelessWidget {
+class Semesterdrop extends StatefulWidget {
   const Semesterdrop({super.key});
+
   @override
+  State<Semesterdrop> createState() => _SemesterdropState();
+}
+
+class _SemesterdropState extends State<Semesterdrop> {
+  @override
+  bool isVisible=false;
+  String? valueChosen;
+  List SemList=["Fall24","Summer24","Spring24","Fall23","Summer23","Spring23","Fall22"];
+
   Widget build(BuildContext context) {
     return Scaffold(
         key: key,
@@ -439,7 +450,7 @@ class Semesterdrop extends StatelessWidget {
           ),
         ),
 
-        body: Column(
+        body: ListView(
           children: [
 
 
@@ -455,10 +466,93 @@ class Semesterdrop extends StatelessWidget {
 
             ),
             Container(
-              margin: EdgeInsets.all(12),
-              child: Text("Comming soon",
-                style: TextStyle(color: Colors.blue[800],fontSize: 18,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+              margin: EdgeInsets.only(left: 30),
+              alignment: Alignment.topLeft,
+              child: Text("Semester:"),
             ),
+            Container(
+              margin: EdgeInsets.all(12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+
+                    Container(
+                      width:380,
+                      child: DropdownButton2(
+                        hint: Text("Select Semester"),
+                        value: valueChosen,
+                        isExpanded: true,
+                        onChanged: (newValue) {
+                          setState(() {
+                            valueChosen = newValue as String;
+                            isVisible=true;
+                          });
+                        },
+                        items: SemList.map((valueItem){
+                          return DropdownMenuItem(value: valueItem,child: Text(valueItem));
+                        }).toList(),
+
+                      ),
+                    ),
+
+
+
+
+
+
+                ],
+              ),
+            ),
+            Visibility(
+              visible: isVisible,
+              child: Container(
+                margin: EdgeInsets.only(left: 30,top: 30,right: 30),
+                alignment: Alignment.topLeft,
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(bottom: 10),
+                      alignment: Alignment.topLeft,
+                      child: Text("Comments:"),
+                    ),
+
+                    TextField(
+                      maxLines: 6,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Please mention the reason...',
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(bottom: 10,top: 20),
+                      alignment: Alignment.topLeft,
+                      child: Text("Attachment"),
+                    ),
+                    Container(
+                      alignment: Alignment.topLeft,
+                      child:ElevatedButton(onPressed: (null),
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.black,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2))),
+                        child: Text("Choose File",style: TextStyle(color: Colors.white,fontSize: 14),),
+                        ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(bottom: 10,top: 0),
+                      alignment: Alignment.topLeft,
+                      child: Text("[The file must be in pdf format and the file size cannot be more than 5 mb.]"),
+                    ),
+                    Container(
+                      alignment: Alignment.topLeft,
+                      child: ElevatedButton.icon(onPressed: () {},
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.green,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7))),
+                        label: Text("Submit",style: TextStyle(color: Colors.white,fontSize: 16),),
+                        icon: FaIcon(FontAwesomeIcons.telegramPlane,color: Colors.white,size: 20,),),
+                    ),
+
+
+                  ],
+                ),
+              ),
+            )
 
 
           ],
@@ -468,7 +562,6 @@ class Semesterdrop extends StatelessWidget {
 
     );
   }
-
 }
 
 

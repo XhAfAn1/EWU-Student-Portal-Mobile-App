@@ -120,33 +120,36 @@ class _HomeState extends State<Home> {
           actions: [
             PopupMenuButton(itemBuilder: (context)=>[
 
-              PopupMenuItem(child: TextButton.icon(icon: FaIcon(FontAwesomeIcons.user,size: 16,color: Colors.black,),onPressed:(){
-
-                    Navigator.of(context).pop();
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context)=> profile(),
-                    ));
-                  } ,
-                    label: Text("   Profile      ",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 16),),),
-
+              PopupMenuItem(child: Row(
+                children: [
+                  Container(margin: EdgeInsets.only(left: 10,right: 10),child: FaIcon(FontAwesomeIcons.user,size: 16,color: Colors.black,)),
+                  Container(child: Text("Profile",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 16),),),
+                ],
+              ), onTap: (){
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context)=> profile(),
+                  ));
+                },
 
               ),
-
-              PopupMenuItem(child: TextButton.icon(icon: FaIcon(FontAwesomeIcons.signInAlt,size: 16,color: Colors.black,),onPressed:() async {
+              PopupMenuItem(child: Row(
+                children: [
+                  Container(margin: EdgeInsets.only(left: 10,right: 10),child: FaIcon(FontAwesomeIcons.signInAlt,size: 16,color: Colors.black,)),
+                  Container(child: Text("LogOut",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 16),),),
+                ],
+              ), onTap: () async{
 
                 var sharedPref= await SharedPreferences.getInstance();
                 sharedPref.setBool(mainLState.KEYLOGIN, false);
-
-               // Navigator.pop(context);
-                Navigator.of(context).pop(true);
+                //Navigator.of(context).pop(true);
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context)=>loginPage(
-                  ),
-
+                  builder: (context)=>loginPage(),
                 ));
-              } ,
-                label: Text("   LogOut      ",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 16),),)
+              },
               ),
+
+
             ],icon: FaIcon(FontAwesomeIcons.userCog,size: 25,color: Colors.white,),color: Colors.white,)
           ],
         ),

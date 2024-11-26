@@ -28,6 +28,12 @@ GlobalKey<ScaffoldState> key = GlobalKey();
 
 class advising extends StatelessWidget {
   const advising({super.key});
+
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -450,32 +456,52 @@ class advising extends StatelessWidget {
               margin: EdgeInsets.all(8),
               padding: EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 192, 57, 43),
+                color: Color.fromARGB(245, 192, 57, 43),
                 borderRadius: BorderRadius.circular(10),
               ),
               height: 100,
               width: 450,
               child: Center(
                 child: Text("YOUR ADVISING SCHEDULE NOT STARTED YET / ADVISING TIME IS OVER.",
-                  style: TextStyle(color: Colors.white,fontSize: 18,),textAlign: TextAlign.left,),
+                  style: TextStyle(color: Colors.white,fontSize: 17,),textAlign: TextAlign.left,),
               ),
             ),
 
             ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 76, 165, 196),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
-              onPressed: (){}, child: Padding(
+              onPressed: (){
+              showDialog(context: context, builder: (context)=>
+                AlertDialog(
+                title: Text("Not Available"),
+                content: Text("This Feature has not been added yet."),
+                  actions: [
+                    TextButton(onPressed: (){
+                       Navigator.of(context).pop();
+                    }, child: Text("Close"))
+                  ],
+              )
+
+              );
+              }, child: Padding(
                 padding: const EdgeInsets.only(left: 30.0,right: 30),
                 child: Text("      Print Slip     ",
                   style: TextStyle(color: Colors.white,fontSize: 18,),textAlign: TextAlign.left,),
               ),),
+            
+            
+            
             ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 76, 165, 196),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
               onPressed: (){
 
+                showAlart(context);
 
               }, child: Padding(
                 padding: const EdgeInsets.only(left: 30.0,right: 30),
                 child: Text("  Instructions   ",
                   style: TextStyle(color: Colors.white,fontSize: 18,),textAlign: TextAlign.left,),
               ),),
+            
+            
+            
             ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 76, 165, 196),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
               onPressed: (){
                 Navigator.of(context).push(MaterialPageRoute(
@@ -494,8 +520,49 @@ class advising extends StatelessWidget {
 
 
     );
-  }
   
+  }
+
 }
+showAlart(BuildContext context){
+  showDialog(context: context,
+      builder:(context){
+        return Dialog(
+          child: Center(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 50, 138, 69),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: ListView(
+                children:[ Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.topRight,
+                      child: IconButton(color: Colors.black,onPressed: (){
+                        Navigator.of(context).pop();
+                      }, icon: FaIcon(FontAwesomeIcons.close,size: 16,color: Colors.white,),
+                        style:IconButton.styleFrom(backgroundColor: Color.fromARGB(255, 0, 0, 0),) ,)
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left:10,right: 10),
+                      child: Text("1. Student must check out his curriculum criteria before starting advising.\n\n2. Student must take minimum credit during self-advising or else he cannot get Print Slip Button. In case of any emergency, if needed to bypass this logic, please contact with assigned adviser.\n\n"
+                          "3. Student cannot exceed the maximum credit limit setup by his own department for this advising. In case of any emergency, if needed to bypass this logic, please contact with assigned adviser.\n\n"
+                          "4. Student must take course/s from F tab (If any). After taking these courses he will be able to view the next tab courses. In case of any emergency, if needed to bypass this logic, please contact with assigned adviser.\n\n"
+                          "5. Click on any section from the left to immediately save it. Saved courses will be shown in right side. No need to click any save button after choosing the section. Section will be immediately saved. You can delete your saved sections using the delete button on the right. Section will be immediately deleted.\n\n"
+                          "6. Student cannot take more than 2 classes in same day.\n\n"
+                          "7. Student can only view the selected courses as per his completed credit. Completed credit = Earned credit + running semester taken credit (Without Dropped/Withdraw).\n\n"
+                          "8. Backlogged courses will be shown in top of the list as per the credit requirement",style: TextStyle(color: Colors.white,fontSize: 14,fontWeight: FontWeight.bold),),
+                    )
+                  ],
+                ),]
+              ),
+
+            ),
+          ),
+        );
+      } );
+}
+
 
 

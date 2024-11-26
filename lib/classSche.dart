@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:ewu_portal/Advising_rule.dart';
 import 'package:ewu_portal/Profile.dart';
 import 'package:ewu_portal/advising.dart';
@@ -25,6 +26,7 @@ import 'curriculumn/Curriculumn.dart';
 GlobalKey<ScaffoldState> key = GlobalKey();
 
 int s=1;
+bool showCourse=false;
 class classSche extends StatefulWidget {
   const classSche({super.key});
 
@@ -36,7 +38,8 @@ class _classScheState extends State<classSche> {
 
   List<Map<String, dynamic>> _courses = [];
   List<Map<String, dynamic>> _filter = [];
-
+  String? valueChosen;
+  List SemList=["Fall24","Summer24","Spring24","Fall23","Summer23","Spring23","Fall22"];
   @override
 
 
@@ -55,9 +58,9 @@ class _classScheState extends State<classSche> {
   }
 @override
   void initState() {
-    // TODO: implement initState
    insertData();
   fetchCourses();
+   showCourse=false;
   }
   Widget build(BuildContext context) {
     return Scaffold(
@@ -464,67 +467,98 @@ class _classScheState extends State<classSche> {
 
 
       Column(
-        children: [
+        children: <Widget>[
+
+          Container(
+            height: 25,
+
+          ),Divider(
+            height: 20,
+            thickness: 0.3,
+            color: Colors.black,
+          ),Container(
+            height: 20,
+
+          ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-             Drop
+
+              Container(
+                width: 250,
+                child: DropdownButton2(
+                  hint: Text("Select Semester"),
+                  value: valueChosen,
+                  isExpanded: true,
+                  onChanged: (newValue) {
+                    setState(() {
+                      valueChosen = newValue as String;
+                    });
+                  },
+                  items: SemList.map((valueItem){
+                    return DropdownMenuItem(value: valueItem,child: Text(valueItem));
+                  }).toList(),
+
+                ),
+              ),
+
+              ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 76, 165, 196),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
+                  onPressed: () async{
+                   await dbh.instance.deleteall();
+                  await insertData();
+                  await fetchCourses();
+                  filterCourses(valueChosen!);
+                  showCourse=true;
+                  s=1;
+                  }, child: Text("SHOW COURSES",
+                    style: TextStyle(color: Colors.white,fontSize: 15,),textAlign: TextAlign.left,),),
+
+
+
             ],
           ),
-          ElevatedButton(onPressed: () async{
-              await insertData();
-            var q= await dbh.instance.queryDatabase();
-            // print(q);
-              await fetchCourses();
-          }, child: Text("Insert")),
+        Container(
+          width: 500,
+          height: 30,
+        ),
+             Visibility(
+               visible: showCourse,
+               child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: DataTable(
+                  border: TableBorder.all(color: Colors.black),
+                  columns: [
+                  DataColumn(label: Text("Serial")),
+                  DataColumn(label: Text("Course")),
+                   DataColumn(label: Text("Section")),
+                   DataColumn(label: Text("Credit")),
+                  DataColumn(label: Text("Timing")),
+                  DataColumn(label: Text("Faculty Initial")),
+                   DataColumn(label: Text("Faculty")),
+                  DataColumn(label: Text("Faculty Mail")),
+                 //  DataColumn(label: Text("Semester")),
 
-          ElevatedButton(onPressed: () async{
+                ],
+                  rows: _filter.map((course) => DataRow(
+                    cells: [
+                      DataCell(Text((s++).toString())),
+                      DataCell(Text(course[dbh.course].toString())),
+                      DataCell(Text(course[dbh.section].toString())),
+                     DataCell(Text(course[dbh.credit].toString())),
+                      DataCell(Text(course[dbh.timing].toString())),
+                      DataCell(Text(course[dbh.facultyIni].toString())),
+                       DataCell(Text(course[dbh.faculty].toString())),
+                      DataCell(Text(course[dbh.facultyMail].toString())),
+                     //  DataCell(Text(course[dbh.semester].toString())),
+                    ],
+                  ),
+                )
+                    .toList(),
 
-            filterCourses("Spring23");
-          }, child: Text("Show only Fall24")),
 
-
-
-
-          ElevatedButton(onPressed: () async{
-            await dbh.instance.deleteall();
-            await fetchCourses();
-            await filterCourses("");
-          }, child: Text("Delete All")),
-
-             SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: DataTable(
-                border: TableBorder.all(color: Colors.black),
-                columns: [
-                DataColumn(label: Text("Serial")),
-                DataColumn(label: Text("Course")),
-                 DataColumn(label: Text("Section")),
-                 DataColumn(label: Text("Credit")),
-                DataColumn(label: Text("Timing")),
-                DataColumn(label: Text("Faculty Initial")),
-                 DataColumn(label: Text("Faculty")),
-                DataColumn(label: Text("Faculty Mail")),
-               //  DataColumn(label: Text("Semester")),
-
-              ], rows: _filter.map((course) => DataRow(
-                  cells: [
-                    DataCell(Text((s++).toString())),
-                    DataCell(Text(course[dbh.course].toString())),
-                    DataCell(Text(course[dbh.section].toString())),
-                   DataCell(Text(course[dbh.credit].toString())),
-                    DataCell(Text(course[dbh.timing].toString())),
-                    DataCell(Text(course[dbh.facultyIni].toString())),
-                     DataCell(Text(course[dbh.faculty].toString())),
-                    DataCell(Text(course[dbh.facultyMail].toString())),
-                   //  DataCell(Text(course[dbh.semester].toString())),
-                  ],
                 ),
-              )
-                  .toList(),
-
-
-              ),
-            ),
+                           ),
+             ),
 
         ],
       ),
@@ -534,38 +568,3 @@ class _classScheState extends State<classSche> {
 }
 
 
-
-
-
-
-
-/*
-
-
-                      DataRow(cells: [
-                        DataCell( Text('01',style: TextStyle(color:Colors.black),)),
-                        DataCell( Text('CSE 246',style: TextStyle(color:Colors.black),)),
-                        DataCell( Text('05',style: TextStyle(color:Colors.black),)),
-                        DataCell( Text('4',style: TextStyle(color:Colors.black),)),
-                        DataCell( Text('TM',style: TextStyle(color:Colors.black),)),
-
-                      ],),
-                  DataRow(cells: [
-                    DataCell( Text('02',style: TextStyle(color:Colors.black),)),
-                    DataCell( Text('CSE 325',style: TextStyle(color:Colors.black),)),
-                    DataCell( Text('05',style: TextStyle(color:Colors.black),)),
-                    DataCell( Text('4',style: TextStyle(color:Colors.black),)),
-                    DataCell( Text('MHMM',style: TextStyle(color:Colors.black),)),
-
-                  ],),
-                  DataRow(cells: [
-                    DataCell( Text('03',style: TextStyle(color:Colors.black),)),
-                    DataCell( Text('CSE 302',style: TextStyle(color:Colors.black),)),
-                    DataCell( Text('06',style: TextStyle(color:Colors.black),)),
-                    DataCell( Text('4',style: TextStyle(color:Colors.black),)),
-                    DataCell( Text('MRJ',style: TextStyle(color:Colors.black),)),
-
-                  ],),
-
-
- */

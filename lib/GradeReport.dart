@@ -27,7 +27,7 @@ GlobalKey<ScaffoldState> key = GlobalKey();
 
 class GradeReport extends StatelessWidget {
   const GradeReport({super.key});
-  @override
+@override
   Widget build(BuildContext context) {
     return Scaffold(
         key: key,
@@ -61,7 +61,6 @@ class GradeReport extends StatelessWidget {
 
           leading: Builder(
             builder: (context) {
-
               return Container(
                 alignment: Alignment.topLeft,
                 color: Color.fromARGB(255, 75, 164, 200), // Set the background color here
@@ -464,10 +463,7 @@ class GradeReport extends StatelessWidget {
         )
 
 
-
     );
   }
-
 }
-
 
