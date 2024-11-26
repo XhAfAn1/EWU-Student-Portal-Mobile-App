@@ -504,9 +504,9 @@ class _classScheState extends State<classSche> {
 
               ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 76, 165, 196),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
                   onPressed: () async{
-                   await dbh.instance.deleteall();
-                  await insertData();
-                  await fetchCourses();
+                  // await dbh.instance.deleteall();
+                 // await insertData();
+                 // await fetchCourses();
                   filterCourses(valueChosen!);
                   showCourse=true;
                   s=1;

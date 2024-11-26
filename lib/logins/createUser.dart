@@ -193,7 +193,7 @@ class createUserState extends State<createUser> {
                         ));
 
                       }
-                      else if(uid=="" || pw==""){
+                      else if(uid=="" || pw=="" || cpw==""){
                         cmsg="Please enter UserID and Pssword";
                       }
                       else

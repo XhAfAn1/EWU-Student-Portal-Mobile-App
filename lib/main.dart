@@ -15,6 +15,7 @@ import 'package:ewu_portal/Profile.dart';
 import 'package:ewu_portal/classSche.dart';
 import 'package:ewu_portal/logins/loginPage.dart';
 import 'package:ewu_portal/logins/mainL.dart';
+import 'package:ewu_portal/logins/updatePass.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -118,7 +119,9 @@ class _HomeState extends State<Home> {
           iconTheme: IconThemeData(color: Colors.black, size: 40),
 
           actions: [
-            PopupMenuButton(itemBuilder: (context)=>[
+            PopupMenuButton(
+             // style: ,
+              itemBuilder: (context)=>[
 
               PopupMenuItem(child: Row(
                 children: [
@@ -133,6 +136,21 @@ class _HomeState extends State<Home> {
                 },
 
               ),
+
+              PopupMenuItem(child: Row(
+                children: [
+                  Container(margin: EdgeInsets.only(left: 10,right: 10),child: FaIcon(FontAwesomeIcons.exchange,size: 16,color: Colors.black,)),
+                  Container(child: Text("Change Password",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 16),),),
+                ],
+              ), onTap: (){
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context)=> updatePass(),
+                ));
+              },
+
+              ),
+
               PopupMenuItem(child: Row(
                 children: [
                   Container(margin: EdgeInsets.only(left: 10,right: 10),child: FaIcon(FontAwesomeIcons.signInAlt,size: 16,color: Colors.black,)),

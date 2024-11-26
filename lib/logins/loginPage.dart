@@ -8,7 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../main.dart';
 import 'createUser.dart';
 
-
+String? currentUserId;
+String? currentUserPass;
  class loginPage extends StatefulWidget {
   const loginPage({super.key});
 
@@ -28,9 +29,6 @@ class _loginPageState extends State<loginPage> {
   String uid="";
   String pw="";
   String msg="";
-
-  String id1="admin";
-  String pw1="password";
 
 
   @override
@@ -136,15 +134,14 @@ class _loginPageState extends State<loginPage> {
                                   print(a);
 
                                     if (a) {
+                                      currentUserId=uid;
+                                      currentUserPass=pw;
                                       var sharedPref = await SharedPreferences.getInstance();
                                       sharedPref.setBool(mainLState.KEYLOGIN, true);
 
                                       Navigator.of(context).pushReplacement(
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                                Home(
-                                                ),
-
+                                            builder: (context) => Home(),
                                           ));
                                     }
                                     else {
