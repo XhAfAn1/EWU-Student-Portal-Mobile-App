@@ -13,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import 'DegreeReview.dart';
 import 'FacEvaluation.dart';
 import 'InstallmentPayment.dart';
@@ -24,7 +23,7 @@ import 'classSche.dart';
 
 
 GlobalKey<ScaffoldState> key = GlobalKey();
-
+List SemList=["Fall24","Summer24","Spring24","Fall23","Summer23","Spring23","Fall22"];
 
 class Semesterdrop extends StatefulWidget {
   const Semesterdrop({super.key});
@@ -37,7 +36,7 @@ class _SemesterdropState extends State<Semesterdrop> {
   @override
   bool isVisible=false;
   String? valueChosen;
-  List SemList=["Fall24","Summer24","Spring24","Fall23","Summer23","Spring23","Fall22"];
+
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -471,42 +470,45 @@ class _SemesterdropState extends State<Semesterdrop> {
               child: Text("Semester:"),
             ),
             Container(
-              margin: EdgeInsets.all(12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-
-                    Container(
-                      width:380,
-                      child: DropdownButton2(
-                        hint: Text("Select Semester"),
-                        value: valueChosen,
-                        isExpanded: true,
-                        onChanged: (newValue) {
-                          setState(() {
-                            valueChosen = newValue as String;
-                            isVisible=true;
-                          });
-                        },
-                        items: SemList.map((valueItem){
-                          return DropdownMenuItem(value: valueItem,child: Text(valueItem));
-                        }).toList(),
-
-                      ),
-                    ),
-
-
-
-
-
-
-                ],
+              decoration: BoxDecoration(
+                  border:
+                 Border.all(color: Colors.grey,width: 1.0
+                ),
+                borderRadius: BorderRadius.all(
+                    Radius.circular(5.0) //                 <--- border radius here
+                ),
               ),
+              margin: EdgeInsets.only(left: 20,right: 20),
+               child:DropdownButtonHideUnderline(
+                 child: DropdownButton2(
+                   
+                          hint: Text("Select Semester"),
+                          value: valueChosen,
+                          isExpanded: true,
+                          onChanged: (newValue) {
+                            setState(() {
+                              valueChosen = newValue as String;
+                              isVisible=true;
+                            });
+                          },
+                          items: SemList.map((valueItem){
+                            return DropdownMenuItem(value: valueItem,child: Text(valueItem));
+                          }).toList(),
+                 
+                 
+                      ),
+               ),
+
+
+
+
+
+
             ),
             Visibility(
               visible: isVisible,
               child: Container(
-                margin: EdgeInsets.only(left: 30,top: 30,right: 30),
+                margin: EdgeInsets.only(left: 30,top: 20,right: 30),
                 alignment: Alignment.topLeft,
                 child: Column(
                   children: [

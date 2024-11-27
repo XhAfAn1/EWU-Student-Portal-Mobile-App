@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:io';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:ewu_portal/Advising_rule.dart';
 import 'package:ewu_portal/GradeReport.dart';
 import 'package:ewu_portal/InstallmentPayment.dart';
@@ -15,6 +16,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'DbHelper/all_Courses.dart';
+import 'DbHelper/dbh2.dart';
 import 'DegreeReview.dart';
 import 'FacEvaluation.dart';
 import 'SemesterDrop.dart';
@@ -23,11 +26,61 @@ import 'classSche.dart';
 
 
 GlobalKey<ScaffoldState> key = GlobalKey();
+List DeptList=["Department of BA","Department of Civil Engineering","Department of CSE","Department of EEE","Department of English","Department of LAW","Department of Pharmacy"];
 
 
-class Offeredcourse extends StatelessWidget {
+class Offeredcourse extends StatefulWidget {
   const Offeredcourse({super.key});
+
   @override
+  State<Offeredcourse> createState() => _OfferedcourseState();
+}
+
+class _OfferedcourseState extends State<Offeredcourse> {
+  @override
+  String? sem;
+  String? dept;
+  List<Map<String, dynamic>> _courses = [];
+  List<Map<String, dynamic>> _filter = [];
+
+  bool isVisible1=false;
+  bool isVisible2=false;
+  bool isVisible=false;
+  String? svalueChosen;
+  String? dvalueChosen;
+
+
+  fetchCourses() async {
+    await dbh2.obj.deleteall();
+    await insertAllCourses();
+    var courses = await dbh2.obj.queryDatabase();
+    setState(() {
+      _courses = courses;
+      print(_courses);
+    });
+  }
+  filterCourses(String sem,String dept) async{
+    setState(() {
+      _filter = _courses.where((course) => course[dbh2.semester].toString() == sem &&course[dbh2.department].toString() == dept).toList();
+      print(_filter);
+    });
+  }
+  filterCoursesbysem(String sem) async{
+    setState(() {
+      _filter = _courses.where((course) => course[dbh2.semester].toString() == sem ).toList();
+      print(_filter);
+    });
+  }
+
+
+
+
+  @override
+  initState()  {
+   // insertAllCourses();
+    fetchCourses();
+    showCourse=false;
+  }
   Widget build(BuildContext context) {
     return Scaffold(
         key: key,
@@ -447,36 +500,187 @@ class Offeredcourse extends StatelessWidget {
           ),
         ),
 
-        body: Column(
-          children: [
+        body:
 
+        Column(
+            children: [
 
-            Container(
-              height: 25,
+          Column(children: [Container(
+            height: 25,
 
-            ),Divider(
+          ),
+            Divider(
               height: 20,
               thickness: 0.3,
               color: Colors.black,
-            ),Container(
-              height: 30,
+            ),
+            Container(
+              height: 10,
 
             ),
             Container(
-              margin: EdgeInsets.all(12),
-              child: Text("Comming soon",
-                style: TextStyle(color: Colors.blue[800],fontSize: 18,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+              margin: EdgeInsets.only(left: 30),
+              alignment: Alignment.topLeft,
+              child: Text("Department"),
             ),
 
 
-          ],
-        )
+            Container(
+              decoration: BoxDecoration(
+                border:
+                Border.all(color: Colors.grey,width: 1.0
+                ),
+                borderRadius: BorderRadius.all(
+                    Radius.circular(5.0) //                 <--- border radius here
+                ),
+              ),
+              margin: EdgeInsets.only(left: 30,right: 30),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton2(
+                  hint: Text("Please Select"),
+                  value: dvalueChosen,
+                  isExpanded: true,
+                  onChanged: (newValue) {
+                    setState(() {
+                      dvalueChosen = newValue as String;
+                      isVisible1=true;
+                    });
+                  },
+                  items: DeptList.map((valueItem){
+                    return DropdownMenuItem(value: valueItem,child: Text(valueItem));
+                  }).toList(),
+                
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(left: 30),
+              alignment: Alignment.topLeft,
+              child: Text("Semester"),
+            ),
+
+            Container(
+              decoration: BoxDecoration(
+                border:
+                Border.all(color: Colors.grey,width: 1.0
+                ),
+                borderRadius: BorderRadius.all(
+                    Radius.circular(5.0) //                 <--- border radius here
+                ),
+              ),
+              margin: EdgeInsets.only(left: 30,right: 30),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton2(
+                  hint: Text("Please Select"),
+                  value: svalueChosen,
+                  isExpanded: true,
+                  onChanged: (newValue) {
+                    setState(() {
+                      svalueChosen = newValue as String;
+                      isVisible2=true;
+                    });
+                  },
+                  items: SemList.map((valueItem){
+                    return DropdownMenuItem(value: valueItem,child: Text(valueItem));
+                  }).toList(),
+                
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(left:30,top: 20,bottom: 30),
+              child: Row(
+                children: [
+
+                  Container(
+                    margin: EdgeInsets.only(right: 10),
+                    child: ElevatedButton.icon(onPressed: () async{
+
+
+                      if(isVisible1 && isVisible2){
+                        await filterCourses(svalueChosen!,dvalueChosen!);
+                        isVisible=true;
+                      }
+                      else if(isVisible2==true && isVisible1==false){
+                        await filterCoursesbysem(svalueChosen!);
+                        isVisible=true;
+                      }
+                      // await fetchCourses();
+
+
+                    },
+                      style: ElevatedButton.styleFrom(backgroundColor: Colors.green,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7))),
+                      label: Text("Show Offered Courses",style: TextStyle(color: Colors.white,fontSize: 12),),
+                      icon: FaIcon(FontAwesomeIcons.eye,color: Colors.white,size: 12,),),
+                  ),
+                  Container(
+                    child: ElevatedButton.icon(onPressed: (){},
+                      style: ElevatedButton.styleFrom(backgroundColor: Colors.blue[800],shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7))),
+                      label: Text("Print",style: TextStyle(color: Colors.white,fontSize: 12),),
+                      icon: FaIcon(FontAwesomeIcons.print,color: Colors.white,size: 12,),),
+                  )
+
+                ],
+              ),
+
+            ),],),
+
+
+
+              Expanded(
+                child: ListView(
+                  children: [ Visibility(
+                    visible: isVisible,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: DataTable(
+                        //border: TableBorder.all(color: Colors.black),
+                        columns: [
+                  
+                          DataColumn(label: Text("Course",style: TextStyle(fontWeight: FontWeight.bold),)),
+                          DataColumn(label: Text("Section",style: TextStyle(fontWeight: FontWeight.bold),)),
+                          DataColumn(label: Text("Timing",style: TextStyle(fontWeight: FontWeight.bold),)),
+                          DataColumn(label: Text("Room No",style: TextStyle(fontWeight: FontWeight.bold),)),
+                          DataColumn(label: Text("Capacity",style: TextStyle(fontWeight: FontWeight.bold),)),
+                          //DataColumn(label: Text("Department",style: TextStyle(fontWeight: FontWeight.bold),)),
+                          //DataColumn(label: Text("Semester",style: TextStyle(fontWeight: FontWeight.bold),)),
+                  
+                        ],
+                        rows: _filter.map((course) => DataRow(
+                          cells: [
+                  
+                            DataCell(Text(course[dbh2.course].toString())),
+                            DataCell(Text(course[dbh2.section].toString())),
+                            DataCell(Text(course[dbh2.timing].toString())),
+                            DataCell(Text(course[dbh2.roomNo].toString())),
+                            DataCell(Text(course[dbh2.capacity].toString())),
+                            //DataCell(Text(course[dbh2.department].toString())),
+                            //DataCell(Text(course[dbh2.semester].toString())),
+                          ],
+                        ),
+                        )
+                            .toList(),
+                  
+                  
+                  
+                  
+                      ),
+                    ),
+                  ),]
+                ),
+              ),
+
+
+            ],
+          )
+
+
+
 
 
 
     );
   }
-
 }
 
 

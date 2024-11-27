@@ -462,7 +462,7 @@ class Myaccleadger extends StatelessWidget {
             ),
             Container(
               margin: EdgeInsets.all(12),
-              child: Text("Comming soon",
+              child: Text("Not Available",
                 style: TextStyle(color: Colors.blue[800],fontSize: 18,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
             ),
 

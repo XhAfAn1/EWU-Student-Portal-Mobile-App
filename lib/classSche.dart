@@ -57,8 +57,8 @@ class _classScheState extends State<classSche> {
     });
   }
 @override
-  void initState() {
-   insertData();
+  initState()  {
+  insertData();
   fetchCourses();
    showCourse=false;
   }
@@ -505,8 +505,8 @@ class _classScheState extends State<classSche> {
               ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 76, 165, 196),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
                   onPressed: () async{
                   // await dbh.instance.deleteall();
-                 // await insertData();
-                 // await fetchCourses();
+                 //await insertData();
+                  await fetchCourses();
                   filterCourses(valueChosen!);
                   showCourse=true;
                   s=1;
@@ -528,21 +528,21 @@ class _classScheState extends State<classSche> {
                 child: DataTable(
                   border: TableBorder.all(color: Colors.black),
                   columns: [
-                  DataColumn(label: Text("Serial")),
-                  DataColumn(label: Text("Course")),
-                   DataColumn(label: Text("Section")),
-                   DataColumn(label: Text("Credit")),
-                  DataColumn(label: Text("Timing")),
-                  DataColumn(label: Text("Faculty Initial")),
-                   DataColumn(label: Text("Faculty")),
-                  DataColumn(label: Text("Faculty Mail")),
-                 //  DataColumn(label: Text("Semester")),
+                  DataColumn(label: Text("Serial",style: TextStyle(fontWeight: FontWeight.bold),),),
+                  DataColumn(label: Text("Course",style: TextStyle(fontWeight: FontWeight.bold),)),
+                   DataColumn(label: Text("Section",style: TextStyle(fontWeight: FontWeight.bold),)),
+                   DataColumn(label: Text("Credit",style: TextStyle(fontWeight: FontWeight.bold),)),
+                  DataColumn(label: Text("Timing",style: TextStyle(fontWeight: FontWeight.bold),)),
+                  DataColumn(label: Text("Faculty Initial",style: TextStyle(fontWeight: FontWeight.bold),)),
+                   DataColumn(label: Text("Faculty",style: TextStyle(fontWeight: FontWeight.bold),)),
+                  DataColumn(label: Text("Faculty Mail",style: TextStyle(fontWeight: FontWeight.bold),)),
+                 //  DataColumn(label: Text("Semester",style: TextStyle(fontWeight: FontWeight.bold),)),
 
                 ],
                   rows: _filter.map((course) => DataRow(
                     cells: [
                       DataCell(Text((s++).toString())),
-                      DataCell(Text(course[dbh.course].toString())),
+                      DataCell(Text(course[dbh.course].toString()),),
                       DataCell(Text(course[dbh.section].toString())),
                      DataCell(Text(course[dbh.credit].toString())),
                       DataCell(Text(course[dbh.timing].toString())),

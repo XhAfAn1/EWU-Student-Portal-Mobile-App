@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:io';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:ewu_portal/Advising_rule.dart';
 import 'package:ewu_portal/DegreeReview.dart';
 import 'package:ewu_portal/GradeReport.dart';
@@ -17,6 +18,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'DbHelper/Course_Data.dart';
+import 'DbHelper/dbh.dart';
 import 'SemesterDrop.dart';
 import 'UploadDoc.dart';
 import 'classSche.dart';
@@ -25,10 +28,43 @@ import 'classSche.dart';
 GlobalKey<ScaffoldState> key = GlobalKey();
 
 
-class Facevaluation extends StatelessWidget {
+class Facevaluation extends StatefulWidget {
+
   const Facevaluation({super.key});
+ @override
+  State<Facevaluation> createState() => _FacevaluationState();
+}
+
+class _FacevaluationState extends State<Facevaluation> {
+
+  List<Map<String, dynamic>> _courses = [];
+  List<Map<String, dynamic>> _filter = [];
+  String? valueChosen;
+  List SemList=["Fall24","Summer24","Spring24","Fall23","Summer23","Spring23","Fall22"];
+
   @override
+
+  fetchCourses() async {
+    var courses = await dbh.instance.queryDatabase();
+    setState(() {
+      _courses = courses;
+    });
+  }
+  filterCourses(String sem) async{
+    setState(() {
+      _filter = _courses.where((course) => course[dbh.semester].toString() == sem).toList();
+    });
+  }
+  @override
+  initState()  {
+    insertData();
+    fetchCourses();
+    showCourse=false;
+  }
+
+  bool isVisible=false;
   Widget build(BuildContext context) {
+
     return Scaffold(
         key: key,
         appBar: AppBar(
@@ -450,7 +486,7 @@ class Facevaluation extends StatelessWidget {
           ),
         ),
 
-        body: Column(
+        body: ListView(
           children: [
 
 
@@ -466,10 +502,85 @@ class Facevaluation extends StatelessWidget {
 
             ),
             Container(
-              margin: EdgeInsets.all(12),
-              child: Text("Comming soon",
-                style: TextStyle(color: Colors.blue[800],fontSize: 18,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+              margin: EdgeInsets.only(left: 30),
+              alignment: Alignment.topLeft,
+              child: Text("Semester:"),
             ),
+            Container(
+              decoration: BoxDecoration(
+                border:
+                Border.all(color: Colors.grey,width: 1.0
+                ),
+                borderRadius: BorderRadius.all(
+                    Radius.circular(5.0) //                 <--- border radius here
+                ),
+              ),
+              margin: EdgeInsets.only(left: 20,right: 20),
+              child:DropdownButtonHideUnderline(
+                child: DropdownButton2(
+                  hint: Text("Select Semester"),
+                  value: valueChosen,
+                  isExpanded: true,
+                  onChanged: (newValue) async{
+                
+                    showCourse=true;
+                    setState(() {
+                      valueChosen = newValue as String;
+                      isVisible=true;
+                    });
+                    await fetchCourses();
+                    filterCourses(valueChosen!);
+                  },
+                  items: SemList.map((valueItem){
+                    return DropdownMenuItem(value: valueItem,child: Text(valueItem));
+                  }).toList(),
+                
+                
+                ),
+              ),
+
+
+
+
+
+
+            ),
+            Visibility(
+              visible: isVisible,
+              child: Container(
+                margin: EdgeInsets.only(top: 20),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: DataTable(
+                        border: TableBorder.all(color: Colors.black),
+                        columns: [
+
+                          DataColumn(label: Text("Course",style: TextStyle(fontWeight: FontWeight.bold),)),
+                          DataColumn(label: Text("Faculty Evaluation Status",style: TextStyle(fontWeight: FontWeight.bold),)),
+                          DataColumn(label: Text("From Date",style: TextStyle(fontWeight: FontWeight.bold),)),
+                          DataColumn(label: Text("To Date",style: TextStyle(fontWeight: FontWeight.bold),)),
+                          DataColumn(label: Text("Evaluate",style: TextStyle(fontWeight: FontWeight.bold),)),
+
+
+                        ],
+                        rows: _filter.map((course) => DataRow(
+                          cells: [
+                            DataCell(Text(course[dbh.course].toString())),
+                            DataCell(Text("Evaluated"),),
+                            DataCell(Text("01/01/2000"),),
+                            DataCell(Text("01/01/2000"),),
+                            DataCell(Text(""),),
+
+                          ],
+                        ),
+                        )
+                            .toList(),
+
+
+                      ),
+                    ),
+              ),
+            )
 
 
           ],
@@ -479,7 +590,6 @@ class Facevaluation extends StatelessWidget {
 
     );
   }
-
 }
 
 

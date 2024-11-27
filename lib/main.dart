@@ -64,7 +64,12 @@ class _HomeState extends State<Home> {
   }
 
   bool isVisible = true;
-
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    isVisible = true;
+  }
   Widget build(BuildContext context) {
 
     return Scaffold(
@@ -507,54 +512,56 @@ class _HomeState extends State<Home> {
         body:  // DismissableContainer(),
       RefreshIndicator(
         onRefresh: refresh,
-        child: ListView(
-          children: [ Column(
-            children: [Visibility(
-
-              visible: isVisible,
-              child: Container(
-                margin: EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 217, 237, 247),
-                  borderRadius: BorderRadius.circular(0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10,right: 2,top: 2,bottom: 2),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Expanded(
-                        child: RichText(text:TextSpan(
-                          children: <TextSpan> [
-                            TextSpan(text: "Welcome ",style: TextStyle(
-                                color: Color.fromARGB(255, 49, 112, 169),
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold),),
-                            TextSpan(text:'to East West University Student Portal!',
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 49, 112, 169),
-                                  fontSize: 14,
-                                  ),
-                            )
-                          ]
-                        ))
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.close, color: Colors.black),
-                        onPressed: () {
-                          setState(() {
-                            isVisible = false;
-                          });
-                        },
-                      ),
-                    ],
+        child: Expanded(
+          child: ListView(
+            children: [ Column(
+              children: [Visibility(
+          
+                visible: isVisible,
+                child: Container(
+                  margin: EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 217, 237, 247),
+                    borderRadius: BorderRadius.circular(0),
                   ),
-                ),
-              ),replacement: Container(
-              color: Colors.black,
-            ),
-            ),],
-          ),]
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10,right: 2,top: 2,bottom: 2),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Expanded(
+                          child: RichText(text:TextSpan(
+                            children: <TextSpan> [
+                              TextSpan(text: "Welcome ",style: TextStyle(
+                                  color: Color.fromARGB(255, 49, 112, 169),
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold),),
+                              TextSpan(text:'to East West University Student Portal!',
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 49, 112, 169),
+                                    fontSize: 14,
+                                    ),
+                              )
+                            ]
+                          ))
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.close, color: Colors.black),
+                          onPressed: () {
+                            setState(() {
+                              isVisible = false;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),replacement: Container(
+                color: Colors.black,
+              ),
+              ),],
+            ),]
+          ),
         ),
       )
 
