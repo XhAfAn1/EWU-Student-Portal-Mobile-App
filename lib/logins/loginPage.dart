@@ -179,7 +179,7 @@ class _loginPageState extends State<loginPage> {
                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7))),onPressed: (){},
                       child: Center(
 
-                        child: Center(child: Text("Forgot your password? Reset it Now",style: TextStyle(color: Colors.white,fontSize: 14),textAlign: TextAlign.center)),
+                        child: Center(child: Text("Forgot your password? Reset it Now",style: TextStyle(color: Colors.white,fontSize: 13),textAlign: TextAlign.center)),
                       )
                   ),
                 ),
@@ -205,7 +205,7 @@ class _loginPageState extends State<loginPage> {
                   },
                       child: Center(
 
-                        child: Center(child: Text("Active Your Account First",style: TextStyle(color: Colors.white,fontSize: 18,),textAlign: TextAlign.center,)),
+                        child: Center(child: Text("Active Your Account First",style: TextStyle(color: Colors.white,fontSize: 16,),textAlign: TextAlign.center,)),
                       )
                   ),
                 ),

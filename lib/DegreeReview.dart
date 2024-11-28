@@ -699,11 +699,11 @@ class Degreereview extends StatelessWidget {
                                   children: [
                                     Container(
 
-                                      padding: EdgeInsets.only(left: 10,right: 10,top: 20),
+                                      padding: EdgeInsets.only(left: 5,right: 5,top: 20,bottom: 50),
                                       width: 450,
                                       height: 535,
                                       child: Table(
-                                        // border:  TableBorder.all(color: Colors.black),
+                                       // border:  TableBorder.all(color: Colors.black),
                                         children: [
                                           TableRow(
                                               decoration: BoxDecoration(
@@ -819,6 +819,7 @@ class Degreereview extends StatelessWidget {
                                         ],
                                       ),
                                     ),
+
                                     Divider(
                                       height: 30,
                                       indent: 40,

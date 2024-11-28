@@ -485,7 +485,7 @@ class _classScheState extends State<classSche> {
             children: [
 
               Container(
-                width: 250,
+                width: 240,
                 child: DropdownButton2(
                   hint: Text("Select Semester"),
                   value: valueChosen,
@@ -502,7 +502,8 @@ class _classScheState extends State<classSche> {
                 ),
               ),
 
-              ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 76, 165, 196),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 76, 165, 196),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
                   onPressed: () async{
                   // await dbh.instance.deleteall();
                  //await insertData();
@@ -511,7 +512,7 @@ class _classScheState extends State<classSche> {
                   showCourse=true;
                   s=1;
                   }, child: Text("SHOW COURSES",
-                    style: TextStyle(color: Colors.white,fontSize: 15,),textAlign: TextAlign.left,),),
+                    style: TextStyle(color: Colors.white,fontSize: 12,),textAlign: TextAlign.left,),),
 
 
 
