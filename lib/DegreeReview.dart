@@ -897,7 +897,49 @@ class Degreereview extends StatelessWidget {
                           ),
                           ),
                         ),
-                        Container()
+                        Container(
+                          margin: EdgeInsets.only(top:20),
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: DataTable(
+                              border: TableBorder.all(color: Colors.black),
+                              columns: [
+                              DataColumn(label: Text("Sl.")),
+                              DataColumn(label: Text("Course")),
+                              DataColumn(label: Text("Title")),
+                              DataColumn(label: Text("Credit")),
+                              DataColumn(label: Text("Grade")),
+                              DataColumn(label: Text("Factor")),
+                              DataColumn(label: Text("Grd Point")),
+                              DataColumn(label: Text("Crd Earn")),
+                            ], rows: [
+                              DataRow(cells: [
+                                DataCell(Text("1")),
+                                DataCell(Text("ENG101")),
+                                DataCell(Text("Basic English")),
+                                DataCell(Text("3")),
+                                DataCell(Text("B")),
+                                DataCell(Text("3")),
+                                DataCell(Text("9")),
+                                DataCell(Text("3")),
+
+                              ]),
+                              DataRow(cells: [
+                                DataCell(Text("2")),
+                                DataCell(Text("ENG102",),),
+                                DataCell(Text("Composition and Communication Skills")),
+                                DataCell(Text("3")),
+                                DataCell(Text("B-")),
+                                DataCell(Text("2.7")),
+                                DataCell(Text("8.1")),
+                                DataCell(Text("3")),
+
+                              ]),
+                            ],
+                              
+                            ),
+                          ),
+                        )
 
 
                       ],
