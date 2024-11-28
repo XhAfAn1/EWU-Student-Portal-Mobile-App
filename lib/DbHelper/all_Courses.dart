@@ -11,6 +11,77 @@ insertAllCourses() async {
     dbh2.roomNo: "336",
     dbh2.capacity: "41/41",
     dbh2.department: "Department of BA",
+    dbh2.semester: "Fall23"
+  });
+  await dbh2.obj.insert({
+    dbh2.course: "ACT101",
+    dbh2.section: 2,
+    dbh2.faculty: "DACY",
+    dbh2.timing: "ST 10:50 AM - 12:05 PM",
+    dbh2.roomNo: "336",
+    dbh2.capacity: "40/40",
+    dbh2.department: "Department of BA",
+    dbh2.semester: "Fall23"
+  });
+  await dbh2.obj.insert({
+    dbh2.course: "ACT101",
+    dbh2.section: 3,
+    dbh2.faculty: "MRDI",
+    dbh2.timing: "ST 12:15 PM - 01:30 PM",
+    dbh2.roomNo: "336",
+    dbh2.capacity: "41/41",
+    dbh2.department: "Department of BA",
+    dbh2.semester: "Fall23"
+  });
+  await dbh2.obj.insert({
+    dbh2.course: "BUS101",
+    dbh2.section: 1,
+    dbh2.faculty: "KH",
+    dbh2.timing: "ST 04:30 PM - 05:45 PM",
+    dbh2.roomNo: "242 (Lecture Gallery)",
+    dbh2.capacity: "41/42",
+    dbh2.department: "Department of BA",
+    dbh2.semester: "Fall23"
+  });
+  await dbh2.obj.insert({
+    dbh2.course: "BUS101",
+    dbh2.section: 2,
+    dbh2.faculty: "KB",
+    dbh2.timing: "S 12:15 PM - 01:30 PM",
+    dbh2.roomNo: "222",
+    dbh2.capacity: "42/42",
+    dbh2.department: "Department of BA",
+    dbh2.semester: "Fall23"
+  });
+  await dbh2.obj.insert({
+    dbh2.course: "BUS101",
+    dbh2.section: 3,
+    dbh2.faculty: "KB",
+    dbh2.timing: "T 12:15 PM - 01:30 PM",
+    dbh2.roomNo: "433",
+    dbh2.capacity: "42/42",
+    dbh2.department: "Department of BA",
+    dbh2.semester: "Fall23"
+  });
+  await dbh2.obj.insert({
+      dbh2.course: "BUS101",
+      dbh2.section: 4,
+      dbh2.faculty: "MSHS",
+      dbh2.timing: "ST 08:00 AM - 09:15 AM",
+      dbh2.roomNo: "FUB-401",
+      dbh2.capacity: "42/42",
+      dbh2.department: "Department of BA",
+      dbh2.semester: "Fall23"});
+  //
+
+  await dbh2.obj.insert({
+    dbh2.course: "ACT101",
+    dbh2.section: 1,
+    dbh2.faculty: "NYN",
+    dbh2.timing: "ST 09:25 AM - 10:40 AM",
+    dbh2.roomNo: "336",
+    dbh2.capacity: "41/41",
+    dbh2.department: "Department of BA",
     dbh2.semester: "Fall24"
   });
   await dbh2.obj.insert({

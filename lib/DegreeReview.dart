@@ -449,29 +449,474 @@ class Degreereview extends StatelessWidget {
           ),
         ),
 
-        body: Column(
-          children: [
+        body: Container(
+          color: Colors.white,
+          child: ListView(
+            children: [
 
 
-            Container(
-              height: 25,
+              Container(
+                height: 25,
 
-            ),Divider(
-              height: 20,
-              thickness: 0.3,
-              color: Colors.black,
-            ),Container(
-              height: 30,
+              ),Divider(
+                height: 20,
+                thickness: 0.3,
+                color: Colors.black,
+              ),Container(
+                height: 50,
 
-            ),
-            Container(
-              margin: EdgeInsets.all(12),
-              child: Text("Not Available",
-                style: TextStyle(color: Colors.blue[800],fontSize: 18,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-            ),
+              ),
+              Stack(
+                children: [
+                  Container(
+
+                    margin: EdgeInsets.only(left:20,right: 20,top:15,bottom: 20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.grey,width: 1.0),
+
+                    ),
+                    width: 450,
+                    //height: 1500,
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: 20),
+                          child: Text("B.Sc. in Computer Science and Engineering",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20),textAlign: TextAlign.center,),
+                        ),
+
+                        Container(
+                          child: Stack(
+                            children: [
+                              Container(
+
+                                margin: EdgeInsets.only(left:20,right: 20,top:15,bottom: 20),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(color: Colors.grey,width: 1.0),
+
+                                ),
+                                width: 450,
+                                height: 530,
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(top: 20),
+                                      child:Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Container(
+                                            margin: EdgeInsets.only(left:30),
+                                            height: 40,
+                                            width: 120,
+                                            padding: EdgeInsets.all(8),
+                                            child: Text("Student Id"),),
+                                          Container(
+                                            height: 40,
+                                            width: 120,
+                                            margin: EdgeInsets.only(right:30),
+                                            padding: EdgeInsets.all(8),
+                                            decoration: BoxDecoration(
+                                              border:
+                                              Border.all(color: Colors.grey,width: 1.0
+                                              ),
+                                              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                              color: Colors.grey[300]
+                                            ),
+                                            child: Text("2022-3-60-045",//textAlign: TextAlign.center,
+                                            ),),
+                                        ],
+                                      )
+                                    ),
+                                    Container(
+                                        margin: EdgeInsets.only(top: 20),
+                                        child:Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Container(
+                                              height: 40,
+                                              width: 120,
+                                              margin: EdgeInsets.only(left:30),
+                                              padding: EdgeInsets.all(8),
+                                              child: Text("Student Name"),),
+                                            Container(
+                                              height: 40,
+                                              width: 120,
+                                              margin: EdgeInsets.only(right:30),
+                                              padding: EdgeInsets.all(8),
+                                              decoration: BoxDecoration(
+                                                  border:
+                                                  Border.all(color: Colors.grey,width: 1.0
+                                                  ),
+                                                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                                  color: Colors.grey[300]
+                                              ),
+                                              child: Text("Saif Islam",textAlign: TextAlign.center,
+                                              ),),
+                                          ],
+                                        )
+                                    ),
+                                    Container(
+                                      alignment: Alignment.topLeft,
+                                        margin: EdgeInsets.only(left:40,top: 50),
+                                      child: Text("CGPA"),
+                                    ),
+                                    Container(
+                                      width: 280,
+                                      height: 40,
+                                      padding: EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                          border:
+                                          Border.all(color: Colors.grey,width: 1.0
+                                          ),
+                                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                          color: Colors.grey[300]
+                                      ),
+                                      margin: EdgeInsets.only(top: 5),
+                                      child: Text("4.20"),
+                                    ),
+                                    Container(
+                                      alignment: Alignment.topLeft,
+                                      margin: EdgeInsets.only(left:40,top: 10),
+                                      child: Text("Cr Atr"),
+                                    ),
+                                    Container(
+                                      width: 280,
+                                      height: 40,
+                                      padding: EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                          border:
+                                          Border.all(color: Colors.grey,width: 1.0
+                                          ),
+                                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                          color: Colors.grey[300]
+                                      ),
+                                      margin: EdgeInsets.only(top: 5),
+                                      child: Text("63"),
+                                    ),
+                                    Container(
+                                      alignment: Alignment.topLeft,
+                                      margin: EdgeInsets.only(left:40,top: 10),
+                                      child: Text("Cr Earn"),
+                                    ),
+                                    Container(
+                                      width: 280,
+                                      height: 40,
+                                      padding: EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                          border:
+                                          Border.all(color: Colors.grey,width: 1.0
+                                          ),
+                                          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                          color: Colors.grey[300]
+                                      ),
+                                      margin: EdgeInsets.only(top: 5),
+                                      child: Text("63"),
+                                    ),
+                                    Container(
+                                        margin: EdgeInsets.only(top: 20),
+                                        child:Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Container(
+                                              height: 40,
+                                              width: 150,
+                                              margin: EdgeInsets.only(left:30),
+                                              padding: EdgeInsets.all(8),
+                                              child: Text("Min Credit Required"),),
+                                            Container(
+                                              height: 40,
+                                              width: 60,
+                                              margin: EdgeInsets.only(right:30),
+                                              padding: EdgeInsets.all(8),
+                                              decoration: BoxDecoration(
+                                                  border:
+                                                  Border.all(color: Colors.grey,width: 1.0
+                                                  ),
+                                                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                                  color: Colors.grey[300]
+                                              ),
+                                              child: Text("140",textAlign: TextAlign.center,
+                                              ),),
+                                          ],
+                                        )
+                                    ),
+                                    Container(
+                                        margin: EdgeInsets.only(top: 20),
+                                        child:Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Container(
+                                              height: 40,
+                                              width: 150,
+                                              margin: EdgeInsets.only(left:30),
+                                              padding: EdgeInsets.all(8),
+                                              child: Text("Remaining Credit"),),
+                                            Container(
+                                              height: 40,
+                                              width: 60,
+                                              margin: EdgeInsets.only(right:30),
+                                              padding: EdgeInsets.all(8),
+                                              decoration: BoxDecoration(
+                                                  border:
+                                                  Border.all(color: Colors.grey,width: 1.0
+                                                  ),
+                                                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                                  color: Colors.grey[300]
+                                              ),
+                                              child: Text("77",textAlign: TextAlign.center,
+                                              ),),
+                                          ],
+                                        )
+                                    ),
 
 
-          ],
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                height: 30,
+                                width: 185,
+                                margin: EdgeInsets.only(left: 45),
+                                color: Colors.white,
+                                child: Text("Student Information",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 19),textAlign: TextAlign.center,),),
+
+                            ],
+                          ),
+                        ),
+
+                        Container(
+                          child: Stack(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(left:20,right: 20,top:15,bottom: 20),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(color: Colors.grey,width: 1.0),
+
+                                ),
+                                child: Column(
+                                  children: [
+                                    Container(
+
+                                      padding: EdgeInsets.only(left: 10,right: 10,top: 20),
+                                      width: 450,
+                                      height: 535,
+                                      child: Table(
+                                        // border:  TableBorder.all(color: Colors.black),
+                                        children: [
+                                          TableRow(
+                                              decoration: BoxDecoration(
+                                                  color: Colors.grey[200]
+                                              ),
+                                              children:[
+                                                TableCell(child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Text("Basic Science Courses"),
+                                                )),
+                                                TableCell(child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Text("11 (Out of 11)"),
+                                                )),
+                                              ]
+                                          ),
+                                          TableRow(
+                                              children:[
+                                                TableCell(child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Text("Mathematics and Statistics Courses"),
+                                                )),
+                                                TableCell(child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Text("15 (Out of 15)"),
+                                                )),
+                                              ]
+                                          ),
+                                          TableRow(
+                                              decoration: BoxDecoration(
+                                                  color: Colors.grey[200]
+                                              ),
+                                              children:[
+                                                TableCell(child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Text("Compulsory Language and General Education Courses"),
+                                                )),
+                                                TableCell(child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Text("9 (Out of 9)"),
+                                                )),
+                                              ]
+                                          ),
+                                          TableRow(
+
+                                              children:[
+                                                TableCell(child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Text("Elective General Education Courses"),
+                                                )),
+                                                TableCell(child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Text("3 (Out of 9)"),
+                                                )),
+                                              ]
+                                          ),
+                                          TableRow(
+                                              decoration: BoxDecoration(
+                                                  color: Colors.grey[200]
+                                              ),
+                                              children:[
+                                                TableCell(child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Text("Core Computer Science and Engineering Courses"),
+                                                )),
+                                                TableCell(child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Text("25 (Out of 62)"),
+                                                )),
+                                              ]
+                                          ),
+                                          TableRow(
+
+                                              children:[
+                                                TableCell(child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Text("Capstone Project"),
+                                                )),
+                                                TableCell(child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Text("0 (Out of 6)"),
+                                                )),
+                                              ]
+                                          ),
+                                          TableRow(
+                                              decoration: BoxDecoration(
+                                                  color: Colors.grey[200]
+                                              ),
+                                              children:[
+                                                TableCell(child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Text("Non-major Elective Computer Science and Engineering Courses"),
+                                                )),
+                                                TableCell(child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Text("25 (Out of 62)"),
+                                                )),
+                                              ]
+                                          ),
+                                          TableRow(
+
+                                              children:[
+                                                TableCell(child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Text("Major"),
+                                                )),
+                                                TableCell(child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Text("0 (Out of 20)"),
+                                                )),
+                                              ]
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Divider(
+                                      height: 30,
+                                      indent: 40,
+                                      endIndent: 40,
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(left: 30,bottom: 10),
+                                      alignment: Alignment.topLeft,
+                                      child: Text("Total Transfer & Waiver: 0\nAt EWU:63"),
+                                    ),
+                                    Divider(
+                                      height: 20,
+                                      indent: 40,
+                                      endIndent: 40,
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(bottom: 20,top: 20),
+                                      child: Text("Total Credits Earned:63 (Out of 140)"),
+                                    ),
+                                    Divider(
+                                      height: 20,
+                                      indent: 40,
+                                      endIndent: 40,
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(bottom: 20),
+
+                                    ),
+
+
+                                  ],
+                                ),
+                              ),
+
+                              Container(
+                                height: 30,
+                                width: 250,
+                                margin: EdgeInsets.only(left: 45),
+                                color: Colors.white,
+                                child: Text("Credit Completion Summary",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 19),textAlign: TextAlign.center,),),
+
+                            ],)
+                        ),
+
+
+
+                        //Results
+
+                        Container(
+                          margin: EdgeInsets.only(top: 10),
+                          padding: EdgeInsets.only(top: 20),
+                          height: 150,
+                          width: 450,
+                          color: Color.fromARGB(255, 95, 158, 160),
+                          child: RichText(textAlign: TextAlign.center,text: TextSpan(
+                            text: "Compulsory Language and General Education Courses\n",
+                            style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 22),
+                          children: [
+                            TextSpan(
+                              text: "Compulsory Language and General Education Courses\n",
+                              style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 16),
+                            ),
+                            TextSpan(
+                              text: "Completed:9",
+                              style: TextStyle(backgroundColor: Colors.green,color: Colors.black,fontWeight: FontWeight.bold,fontSize: 16),
+                            ),
+                            TextSpan(
+                              text: "   ",
+
+                            ),
+                            TextSpan(
+                              text: "Remaining:0",
+                              style: TextStyle(backgroundColor: Colors.yellow,color: Colors.black,fontWeight: FontWeight.bold,fontSize: 16),
+                            ),
+                          ]
+                          ),
+                          ),
+                        ),
+                        Container()
+
+
+                      ],
+                    ),
+
+                  ),
+                  Container(
+                    height: 30,
+                    width: 145,
+                    margin: EdgeInsets.only(left: 45),
+                    color: Colors.white,
+                    child: Text("Degree Analysis",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 19),textAlign: TextAlign.center,),),
+
+                ],
+              )
+
+
+            ],
+          ),
         )
 
 
