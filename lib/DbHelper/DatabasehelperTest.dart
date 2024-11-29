@@ -4,9 +4,9 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
-class databasTest2{
+class databasTest3{
 
-  static const dbName="myDatabase.db";
+  static const dbName="myDatabase1.db";
   static const dbVersion =1;
   static const dbTable1="courseList";
   static const columnId='id';
@@ -27,7 +27,7 @@ class databasTest2{
 
   static const dbTable3="fac";
 
-  static final databasTest2 instance =databasTest2();
+  static final databasTest3 instance =databasTest3();
 
   static Database? _database;
 
@@ -57,23 +57,7 @@ class databasTest2{
       $facultyMail TEXT  NO NULL,
       $semester TEXT  NO NULL
       );
-      CREATE TABLE $dbTable2(
-      $course TEXT NOT NULL,
-      $section INTEGER  NOT NULL,
-      $faculty TEXT  NOT NULL,
-      $timing TEXT  NOT NULL,
-      $roomNo TEXT NOT NULL,
-      $capacity TEXT  NOT NULL,
-      $department TEXT  NOT NULL,
-      $semester TEXT  NOT NULL,
-      PRIMARY KEY($course,$department,$semester,$section)
-      );
-      
-        CREATE TABLE $dbTable3(
-      $course TEXT NOT NULL,
-      $faculty TEXT  NOT NULL,
-      $department TEXT  NOT NULL);
-       
+    
      
       """
     );
@@ -134,17 +118,32 @@ class databasTest2{
   }
 Future rawRun1() async {
   Database? db= await instance.database;
-  return db!.rawQuery('''    
+  return db!.rawQuery("""   
         
+     
+      
+       CREATE TABLE $dbTable2(
+      $course TEXT NOT NULL,
+      $section INTEGER  NOT NULL,
+      $faculty TEXT  NOT NULL,
+      $timing TEXT  NOT NULL,
+      $roomNo TEXT NOT NULL,
+      $capacity TEXT  NOT NULL,
+      $department TEXT  NOT NULL,
+      $semester TEXT  NOT NULL,
+      PRIMARY KEY($course,$department,$semester,$section)
+      );
        
   
-     ''');
+     """);
 }
   Future rawRun2() async {
     Database? db= await instance.database;
     return db!.rawQuery('''    
   
   
+  
+   
         CREATE TABLE $dbTable3(
       $course TEXT NOT NULL,
       $faculty TEXT  NOT NULL,

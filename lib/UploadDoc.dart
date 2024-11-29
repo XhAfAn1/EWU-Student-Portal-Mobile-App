@@ -50,29 +50,29 @@ class _UploaddocState extends State<Uploaddoc> {
 
 
   fetchCourses1() async {
-    try{await databasTest2.instance.deleteall3();}catch(e){};
+    try{await databasTest3.instance.deleteall1();}catch(e){};
 
-    await databasTest2.instance.insert1({
-      databasTest2.course: "ENG101",
-      databasTest2.section: 22,
-      databasTest2.credit: 3,
-      databasTest2.timing: "TR 3:10PM-4:40PM",
-      databasTest2.faculty: "Ms. Ruhul Asfia",
-      databasTest2.facultyIni: "ASFIA"
-      ,databasTest2.facultyMail: "ruhul.asfia@ewubd.edu",
-      databasTest2.semester: "Fall22"
+    await databasTest3.instance.insert1({
+      databasTest3.course: "ENG101",
+      databasTest3.section: 22,
+      databasTest3.credit: 3,
+      databasTest3.timing: "TR 3:10PM-4:40PM",
+      databasTest3.faculty: "Ms. Ruhul Asfia",
+      databasTest3.facultyIni: "ASFIA"
+      ,databasTest3.facultyMail: "ruhul.asfia@ewubd.edu",
+      databasTest3.semester: "Fall22"
     });
-    await databasTest2.instance.insert1({
-      databasTest2.course: "ENG",
-      databasTest2.section: 2,
-      databasTest2.credit: 2,
-      databasTest2.timing: "TR 3:10PM-4:40PM",
-      databasTest2.faculty: "Ms. Ruhul Asfi",
-      databasTest2.facultyIni: "ASFI"
-      ,databasTest2.facultyMail: "ruhul.asfia@ewubd.ed",
-      databasTest2.semester: "Fall22"
+    await databasTest3.instance.insert1({
+      databasTest3.course: "ENG",
+      databasTest3.section: 2,
+      databasTest3.credit: 2,
+      databasTest3.timing: "TR 3:10PM-4:40PM",
+      databasTest3.faculty: "Ms. Ruhul Asfi",
+      databasTest3.facultyIni: "ASFI"
+      ,databasTest3.facultyMail: "ruhul.asfia@ewubd.ed",
+      databasTest3.semester: "Fall22"
     });
-    var courses = await databasTest2.instance.queryDatabase1();
+    var courses = await databasTest3.instance.queryDatabase1();
     setState(() {
       _courses1 = courses;
       print(_courses1);
@@ -83,28 +83,28 @@ class _UploaddocState extends State<Uploaddoc> {
 
 
   fetchCourses2() async {
-    try{await databasTest2.instance.deleteall2();}catch(e){};
-    await databasTest2.instance.insert2({
-      databasTest2.course: "ACT101",
-      databasTest2.section: 1,
-      databasTest2.faculty: "NYN",
-      databasTest2.timing: "ST 09:25 AM - 10:40 AM",
-      databasTest2.roomNo: "336",
-      databasTest2.capacity: "41/41",
-      databasTest2.department: "Department of BA",
-      databasTest2.semester: "Fall23"
+    try{await databasTest3.instance.deleteall2();}catch(e){};
+    await databasTest3.instance.insert2({
+      databasTest3.course: "ACT101",
+      databasTest3.section: 1,
+      databasTest3.faculty: "NYN",
+      databasTest3.timing: "ST 09:25 AM - 10:40 AM",
+      databasTest3.roomNo: "336",
+      databasTest3.capacity: "41/41",
+      databasTest3.department: "Department of BA",
+      databasTest3.semester: "Fall23"
     });
-    await databasTest2.instance.insert2({
-      databasTest2.course: "ACT101",
-      databasTest2.section: 3,
-      databasTest2.faculty: "NYN",
-      databasTest2.timing: "ST 09:25 AM - 10:40 AM",
-      databasTest2.roomNo: "336",
-      databasTest2.capacity: "41/41",
-      databasTest2.department: "Department of BA",
-      databasTest2.semester: "Fall24"
+    await databasTest3.instance.insert2({
+      databasTest3.course: "ACT101",
+      databasTest3.section: 3,
+      databasTest3.faculty: "NYN",
+      databasTest3.timing: "ST 09:25 AM - 10:40 AM",
+      databasTest3.roomNo: "336",
+      databasTest3.capacity: "41/41",
+      databasTest3.department: "Department of BA",
+      databasTest3.semester: "Fall24"
     });
-    var courses = await databasTest2.instance.queryDatabase2();
+    var courses = await databasTest3.instance.queryDatabase2();
     setState(() {
       _courses2 = courses;
       print(_courses2);
@@ -112,21 +112,21 @@ class _UploaddocState extends State<Uploaddoc> {
   }
 
   fetchCourses3() async {
-    try{await databasTest2.instance.deleteall3();}catch(e){};
+    try{await databasTest3.instance.deleteall3();}catch(e){};
 
-    await databasTest2.instance.insert3({
-      databasTest2.course: "Asfsd11",
-      databasTest2.faculty: "NYN",
-      databasTest2.department: "Departmenfsdt of BA",
-
-    });
-    await databasTest2.instance.insert3({
-      databasTest2.course: "Adfsd11",
-      databasTest2.faculty: "NsfsdN",
-      databasTest2.department: "Depadsfsf of BA",
+    await databasTest3.instance.insert3({
+      databasTest3.course: "Asfsd11",
+      databasTest3.faculty: "NYN",
+      databasTest3.department: "Departmenfsdt of BA",
 
     });
-    var courses = await databasTest2.instance.queryDatabase3();
+    await databasTest3.instance.insert3({
+      databasTest3.course: "Adfsd11",
+      databasTest3.faculty: "NsfsdN",
+      databasTest3.department: "Depadsfsf of BA",
+
+    });
+    var courses = await databasTest3.instance.queryDatabase3();
     setState(() {
       _courses3 = courses;
       print(_courses3);
@@ -598,42 +598,58 @@ class _UploaddocState extends State<Uploaddoc> {
                   style: ElevatedButton.styleFrom(backgroundColor: Color.fromARGB(255, 76, 165, 196),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
                   onPressed: () async{
 
-                   //  await databasTest2.instance.deleteall1();
+                    try{
+                       await databasTest3.instance.rawRun1();
+                    await databasTest3.instance.rawRun2();
+                    }catch(e){}
 
-                    //await databasTest2.instance.rawRun2();
-                    //await databasTest.instance.rawRun2();
+
 
 
                      //
-                     // await databasTest2.instance.deleteall2();
+                      try{
+                      await databasTest3.instance.deleteall1();
+                    await databasTest3.instance.deleteall2();
+                    await databasTest3.instance.deleteall3();
+                      }catch(e){}
                      // //
-                     // await databasTest2.instance.insert2({
-                     //   databasTest2.course: "ACT101",
-                     //   databasTest2.section: 1,
-                     //   databasTest2.faculty: "NYN",
-                     //   databasTest2.timing: "ST 09:25 AM - 10:40 AM",
-                     //   databasTest2.roomNo: "336",
-                     //   databasTest2.capacity: "41/41",
-                     //   databasTest2.department: "Department of BA",
-                     //   databasTest2.semester: "Fall23"
+                     // await databasTest3.instance.insert2({
+                     //   databasTest3.course: "ACT101",
+                     //   databasTest3.section: 1,
+                     //   databasTest3.faculty: "NYN",
+                     //   databasTest3.timing: "ST 09:25 AM - 10:40 AM",
+                     //   databasTest3.roomNo: "336",
+                     //   databasTest3.capacity: "41/41",
+                     //   databasTest3.department: "Department of BA",
+                     //   databasTest3.semester: "Fall23"
                      // });
-                     // await databasTest2.instance.insert2({
-                     //   databasTest2.course: "ACT101",
-                     //   databasTest2.section: 3,
-                     //   databasTest2.faculty: "NYN",
-                     //   databasTest2.timing: "ST 09:25 AM - 10:40 AM",
-                     //   databasTest2.roomNo: "336",
-                     //   databasTest2.capacity: "41/41",
-                     //   databasTest2.department: "Department of BA",
-                     //   databasTest2.semester: "Fall24"
-                     // });
-                     // await databasTest2.instance.deleteall3();
-                     // await databasTest2.instance.insert3({
-                     //   databasTest2.course: "Asfsd11",
-                     //   databasTest2.faculty: "NYN",
-                     //   databasTest2.department: "Departmenfsdt of BA",
-                     //
-                     // });
+                    await databasTest3.instance.insert1({
+                      databasTest3.course: "ENG101",
+                      databasTest3.section: 22,
+                      databasTest3.credit: 3,
+                      databasTest3.timing: "TR 3:10PM-4:40PM",
+                      databasTest3.faculty: "Ms. Ruhul Asfia",
+                      databasTest3.facultyIni: "ASFIA"
+                      ,databasTest3.facultyMail: "ruhul.asfia@ewubd.edu",
+                      databasTest3.semester: "Fall22"
+                    });
+                     await databasTest3.instance.insert2({
+                       databasTest3.course: "ACT101",
+                       databasTest3.section: 3,
+                       databasTest3.faculty: "NYN",
+                       databasTest3.timing: "ST 09:25 AM - 10:40 AM",
+                       databasTest3.roomNo: "336",
+                       databasTest3.capacity: "41/41",
+                       databasTest3.department: "Department of BA",
+                       databasTest3.semester: "Fall24"
+                     });
+                     //await databasTest3.instance.deleteall3();
+                     await databasTest3.instance.insert3({
+                       databasTest3.course: "Asfsd11",
+                       databasTest3.faculty: "NYN",
+                       databasTest3.department: "Departmenfsdt of BA",
+
+                     });
                      // await databasTest2.instance.insert3({
                      //   databasTest2.course: "Adfsd11",
                      //   databasTest2.faculty: "NsfsdN",
@@ -673,13 +689,13 @@ class _UploaddocState extends State<Uploaddoc> {
                   rows: _courses1.map((course) => DataRow(
                     cells: [
                       DataCell(Text((s++).toString())),
-                      DataCell(Text(course[databasTest2.course].toString()),),
-                      DataCell(Text(course[databasTest2.section].toString())),
-                      DataCell(Text(course[databasTest2.credit].toString())),
-                      DataCell(Text(course[databasTest2.timing].toString())),
-                      DataCell(Text(course[databasTest2.facultyIni].toString())),
-                      DataCell(Text(course[databasTest2.faculty].toString())),
-                      DataCell(Text(course[databasTest2.facultyMail].toString())),
+                      DataCell(Text(course[databasTest3.course].toString()),),
+                      DataCell(Text(course[databasTest3.section].toString())),
+                      DataCell(Text(course[databasTest3.credit].toString())),
+                      DataCell(Text(course[databasTest3.timing].toString())),
+                      DataCell(Text(course[databasTest3.facultyIni].toString())),
+                      DataCell(Text(course[databasTest3.faculty].toString())),
+                      DataCell(Text(course[databasTest3.facultyMail].toString())),
                       //  DataCell(Text(course[dbh.semester].toString())),
                     ],
                   ),
@@ -717,11 +733,11 @@ class _UploaddocState extends State<Uploaddoc> {
                   rows: _courses2.map((course) => DataRow(
                     cells: [
 
-                      DataCell(Text(course[databasTest2.course].toString())),
-                      DataCell(Text(course[databasTest2.section].toString())),
-                      DataCell(Text(course[databasTest2.timing].toString())),
-                      DataCell(Text(course[databasTest2.roomNo].toString())),
-                      DataCell(Text(course[databasTest2.capacity].toString())),
+                      DataCell(Text(course[databasTest3.course].toString())),
+                      DataCell(Text(course[databasTest3.section].toString())),
+                      DataCell(Text(course[databasTest3.timing].toString())),
+                      DataCell(Text(course[databasTest3.roomNo].toString())),
+                      DataCell(Text(course[databasTest3.capacity].toString())),
                       //DataCell(Text(course[dbh2.department].toString())),
                       //DataCell(Text(course[dbh2.semester].toString())),
                     ],
@@ -755,11 +771,11 @@ class _UploaddocState extends State<Uploaddoc> {
                   rows: _courses3.map((course) => DataRow(
                     cells: [
 
-                      DataCell(Text(course[databasTest2.course].toString())),
+                      DataCell(Text(course[databasTest3.course].toString())),
 
-                      DataCell(Text(course[databasTest2.faculty].toString())),
+                      DataCell(Text(course[databasTest3.faculty].toString())),
 
-                      DataCell(Text(course[databasTest2.department].toString())),
+                      DataCell(Text(course[databasTest3.department].toString())),
 
                     ],
                   ),
