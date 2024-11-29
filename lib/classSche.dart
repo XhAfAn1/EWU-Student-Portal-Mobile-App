@@ -44,6 +44,8 @@ class _classScheState extends State<classSche> {
 
 
   fetchCourses() async {
+    await dbh.instance.deleteall();
+    await insertData();
     var courses = await dbh.instance.queryDatabase();
     setState(() {
       _courses = courses;
@@ -58,7 +60,7 @@ class _classScheState extends State<classSche> {
   }
 @override
   initState()  {
-  insertData();
+  //insertData();
   fetchCourses();
    showCourse=false;
   }

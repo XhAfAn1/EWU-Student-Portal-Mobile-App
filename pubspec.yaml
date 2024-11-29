@@ -71,7 +71,6 @@ flutter:
   assets:
      - assets/logonn.png
      - assets/
-     - assets/raw/
      - assets/faculty_building.jpg
      - assets/Logo_of_EWU.jpg
 

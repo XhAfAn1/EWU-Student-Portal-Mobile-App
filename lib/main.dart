@@ -98,8 +98,11 @@ class _HomeState extends State<Home> {
             builder: (context) {
 
               return Container(
+                height: 50,
+                width: 40,
                 alignment: Alignment.topLeft,
-                color: Color.fromARGB(255, 75, 164, 200), // Set the background color here
+                color: Color.fromARGB(255, 75, 164, 200),
+                //color: Color.fromARGB(255, 255, 0, 0),
                 child: IconButton(
                   icon: Icon(Icons.menu, color: Colors.white),
                   onPressed: () {
@@ -124,11 +127,19 @@ class _HomeState extends State<Home> {
           iconTheme: IconThemeData(color: Colors.black, size: 40),
 
           actions: [
+            Container(
+              child: IconButton(onPressed: (){}, icon: Badge.count(
+                count: 0,
+                  padding: EdgeInsets.all(2),
+                  child: FaIcon(FontAwesomeIcons.bell,size: 25,color: Colors.white,)),color: Colors.white,),
+            )
+            ,
             PopupMenuButton(
-             // style:,
+              offset: Offset(0, 50),
               itemBuilder: (context)=>[
 
-              PopupMenuItem(child: Row(
+              PopupMenuItem(
+                child: Row(
                 children: [
                   Container(margin: EdgeInsets.only(left: 10,right: 10),child: FaIcon(FontAwesomeIcons.user,size: 16,color: Colors.black,)),
                   Container(child: Text("Profile",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 16),),),
@@ -173,7 +184,11 @@ class _HomeState extends State<Home> {
               ),
 
 
-            ],icon: FaIcon(FontAwesomeIcons.userCog,size: 25,color: Colors.white,),color: Colors.white,)
+            ],icon: CircleAvatar(
+              backgroundImage: AssetImage("assets/bateman.jpg",)
+            )
+            //FaIcon(FontAwesomeIcons.userCog,size: 25,color: Colors.white,),color: Colors.white,
+       )
           ],
         ),
         drawer: Drawer(
