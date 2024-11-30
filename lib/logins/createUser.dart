@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:ewu_portal/logins/loginPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../main.dart';
@@ -56,7 +57,8 @@ class createUserState extends State<createUser> {
   String pw="";
   String cpw="";
   String cmsg="";
-
+ bool obscuretext1=true;
+  bool obscuretext2=true;
 
   //storing the userinfo in sharedPref
 
@@ -135,9 +137,21 @@ class createUserState extends State<createUser> {
                   padding: const EdgeInsets.only(left: 40.0,right: 40,top:20),
                   child: TextField(
                     controller: pwcontroler,
-                    obscureText: true,
+                    obscureText: obscuretext1,
                     decoration: InputDecoration(
-                        hintText: 'Enter Password'
+                        hintText: 'Enter Password',
+                      suffixIcon: GestureDetector(
+                        onTap: (){
+                          setState(() {
+                            obscuretext1=!obscuretext1;
+                          });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: FaIcon((obscuretext1? FontAwesomeIcons.solidEye:
+                          FontAwesomeIcons.eye ),size: 20,),
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -145,9 +159,21 @@ class createUserState extends State<createUser> {
                   padding: const EdgeInsets.only(left: 40.0,right: 40,top:20),
                   child: TextField(
                     controller: cpwcontroler,
-                    obscureText: true,
+                    obscureText: obscuretext2,
                     decoration: InputDecoration(
-                        hintText: 'Confirm Password'
+                        hintText: 'Confirm Password',
+                      suffixIcon: GestureDetector(
+                        onTap: (){
+                          setState(() {
+                            obscuretext2=!obscuretext2;
+                          });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: FaIcon((obscuretext2? FontAwesomeIcons.solidEye:
+                          FontAwesomeIcons.eye ),size: 20,),
+                        ),
+                      ),
                     ),
                   ),
                 ),

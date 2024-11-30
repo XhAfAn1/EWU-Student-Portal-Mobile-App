@@ -14,6 +14,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import '../DegreeReview.dart';
 import '../FacEvaluation.dart';
@@ -27,6 +28,9 @@ import '../classSche.dart';
 
 
 import '../convo.dart';
+import '../logins/loginPage.dart';
+import '../logins/mainL.dart';
+import '../logins/updatePass.dart';
 
 GlobalKey<ScaffoldState> key = GlobalKey();
 
@@ -48,12 +52,9 @@ class Curriculumn extends StatelessWidget {
 
           ),
           onPressed: (){
-
             Navigator.of(context).pop();
             Navigator.of(context).push(MaterialPageRoute(
-              builder: (context)=>Home(
-              ),
-
+              builder: (context)=>Home(),
             ));
 
           },
@@ -69,8 +70,11 @@ class Curriculumn extends StatelessWidget {
           builder: (context) {
 
             return Container(
+              height: 50,
+              width: 40,
               alignment: Alignment.topLeft,
-              color: Color.fromARGB(255, 75, 164, 200), // Set the background color here
+              color: Color.fromARGB(255, 75, 164, 200),
+              //color: Color.fromARGB(255, 255, 0, 0),
               child: IconButton(
                 icon: Icon(Icons.menu, color: Colors.white),
                 onPressed: () {
@@ -93,18 +97,70 @@ class Curriculumn extends StatelessWidget {
               )),
         ),
         iconTheme: IconThemeData(color: Colors.black, size: 40),
+
         actions: [
-          IconButton(
-            icon: FaIcon(FontAwesomeIcons.user,color: Color.fromARGB(255, 40, 65, 111),size: 20,),
-            style: IconButton.styleFrom(backgroundColor: Color.fromARGB(
-                124, 255, 255, 255),),//style: ,
-            onPressed: () {
-              Navigator.of(context).pop();
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context)=> profile(),
-              ));
-            },
-          ),
+          Container(
+            child: IconButton(onPressed: (){}, icon: Badge.count(
+                count: 0,
+                padding: EdgeInsets.all(2),
+                child: FaIcon(FontAwesomeIcons.bell,size: 25,color: Colors.white,)),color: Colors.white,),
+          )
+          ,
+          PopupMenuButton(
+              offset: Offset(0, 50),
+              itemBuilder: (context)=>[
+
+                PopupMenuItem(
+                  child: Row(
+                    children: [
+                      Container(margin: EdgeInsets.only(left: 10,right: 10),child: FaIcon(FontAwesomeIcons.user,size: 16,color: Colors.black,)),
+                      Container(child: Text("Profile",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 16),),),
+                    ],
+                  ), onTap: (){
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context)=> profile(),
+                  ));
+                },
+
+                ),
+
+                PopupMenuItem(child: Row(
+                  children: [
+                    Container(margin: EdgeInsets.only(left: 10,right: 10),child: FaIcon(FontAwesomeIcons.exchange,size: 16,color: Colors.black,)),
+                    Container(child: Text("Change Password",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 16),),),
+                  ],
+                ), onTap: (){
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context)=> updatePass(),
+                  ));
+                },
+
+                ),
+
+                PopupMenuItem(child: Row(
+                  children: [
+                    Container(margin: EdgeInsets.only(left: 10,right: 10),child: FaIcon(FontAwesomeIcons.signInAlt,size: 16,color: Colors.black,)),
+                    Container(child: Text("LogOut",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 16),),),
+                  ],
+                ), onTap: () async{
+
+                  var sharedPref= await SharedPreferences.getInstance();
+                  sharedPref.setBool(mainLState.KEYLOGIN, false);
+                  //Navigator.of(context).pop(true);
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context)=>loginPage(),
+                  ));
+                },
+                ),
+
+
+              ],icon: CircleAvatar(
+              backgroundImage: AssetImage("assets/bateman.jpg",)
+          )
+            //FaIcon(FontAwesomeIcons.userCog,size: 25,color: Colors.white,),color: Colors.white,
+          )
         ],
       ),
       drawer: Drawer(

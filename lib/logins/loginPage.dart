@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:ewu_portal/logins/mainL.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../main.dart';
@@ -30,6 +31,7 @@ class _loginPageState extends State<loginPage> {
   String pw="";
   String msg="";
 
+   bool obscuretext=true;
 
   @override
   Widget build(BuildContext context) {
@@ -77,11 +79,24 @@ class _loginPageState extends State<loginPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 40.0,right: 40,top:20),
-                  child: TextField(
+                  child:
+                  TextField(
                     controller: pwcontroler,
-                    obscureText: true,
+                    obscureText: obscuretext,
                     decoration: InputDecoration(
-                        hintText: 'Password'
+                        hintText: 'Password',
+                      suffixIcon: GestureDetector(
+                        onTap: (){
+                             setState(() {
+                               obscuretext=!obscuretext;
+                             });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: FaIcon((obscuretext? FontAwesomeIcons.solidEye:
+                          FontAwesomeIcons.eye ),size: 20,),
+                        ),
+                      ),
                     ),
                   ),
                 ),
