@@ -198,7 +198,7 @@ class createUserState extends State<createUser> {
 
                     setState(() {
 
-                      uid=uidcontroler.text;
+                      uid=uidcontroler.text.trimRight();
                       pw=pwcontroler.text;
                       cpw=cpwcontroler.text;
 

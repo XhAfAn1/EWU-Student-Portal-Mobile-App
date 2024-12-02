@@ -141,7 +141,7 @@ class _loginPageState extends State<loginPage> {
 
                                 setState(() async {
 
-                                  uid=uidcontroler.text;
+                                  uid=uidcontroler.text.trimRight();
                                   pw=pwcontroler.text;
 
                                   var a= UserList.any((user)=>user.userId==uid && user.userpass==pw);
