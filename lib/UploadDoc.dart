@@ -764,12 +764,6 @@ class _UploaddocState extends State<Uploaddoc> {
             ),
 
 
-
-
-
-
-
-
             Container(
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
