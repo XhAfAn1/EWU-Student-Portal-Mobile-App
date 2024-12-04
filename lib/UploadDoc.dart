@@ -795,9 +795,6 @@ class _UploaddocState extends State<Uploaddoc> {
                   )
                       .toList(),
 
-
-
-
                 ),
               ),
             ),
