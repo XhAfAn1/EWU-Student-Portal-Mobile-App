@@ -27,7 +27,6 @@ import 'logins/updatePass.dart';
 
 GlobalKey<ScaffoldState> key = GlobalKey();
 
-
 class Myaccleadger extends StatelessWidget {
   const Myaccleadger({super.key});
   @override
@@ -524,8 +523,6 @@ class Myaccleadger extends StatelessWidget {
 
           ],
         )
-
-
 
     );
   }

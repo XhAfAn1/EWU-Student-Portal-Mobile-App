@@ -40,7 +40,6 @@ class _SemesterdropState extends State<Semesterdrop> {
   bool isVisible=false;
   String? valueChosen;
 
-
   Widget build(BuildContext context) {
     return Scaffold(
         key: key,

@@ -579,7 +579,6 @@ class _OfferedcourseState extends State<Offeredcourse> {
               child: Text("Department"),
             ),
 
-
             Container(
               decoration: BoxDecoration(
                 border:

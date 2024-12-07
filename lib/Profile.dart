@@ -25,7 +25,6 @@ import 'logins/updatePass.dart';
 
 GlobalKey<ScaffoldState> key = GlobalKey();
 
-
 class profile extends StatelessWidget {
   const profile({super.key});
   @override
