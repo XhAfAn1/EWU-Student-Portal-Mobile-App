@@ -25,14 +25,21 @@ import 'logins/updatePass.dart';
 
 GlobalKey<ScaffoldState> key = GlobalKey();
 
-class profile extends StatelessWidget {
+class profile extends StatefulWidget {
   const profile({super.key});
+
+  @override
+  State<profile> createState() => _profileState();
+}
+
+class _profileState extends State<profile> {
   @override
 
   Future<void> refresh (){
     prRld();
     return Future.delayed(Duration(seconds: 1));
   }
+
   prRld() {
     return profile();
   }
@@ -41,21 +48,35 @@ class profile extends StatelessWidget {
     return Scaffold(
         key: key,
       appBar: AppBar(
-        toolbarHeight: 60,
+        titleSpacing: 0.0,
+        toolbarHeight: 55,
         title: TextButton(
-          child: Image.asset(
-            "assets/logonn.png",
-            width: 200,
-            height: 50,
-            alignment: Alignment.topLeft,
 
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                alignment: Alignment.topLeft,
+                child: Image.asset(
+                  "assets/logonn.png",
+                  width: 210,
+                  height: 50,
+                  alignment: Alignment.bottomLeft,
+
+                ),
+              ),
+              Divider(
+                indent: 0,
+                height: 5,
+                endIndent: 30,
+              )
+            ],
           ),
           onPressed: (){
             Navigator.of(context).pop();
             Navigator.of(context).push(MaterialPageRoute(
               builder: (context)=>Home(),
             ));
-
           },
           style: ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
@@ -85,6 +106,7 @@ class profile extends StatelessWidget {
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
+
         flexibleSpace: Container(
           decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -97,56 +119,103 @@ class profile extends StatelessWidget {
         ),
         iconTheme: IconThemeData(color: Colors.black, size: 40),
 
-        actions: [
-          Container(
-            child: IconButton(onPressed: (){}, icon: Badge.count(
-                count: 0,
-                padding: EdgeInsets.all(2),
-                child: FaIcon(FontAwesomeIcons.bell,size: 25,color: Colors.white,)),color: Colors.white,),
-          )
-          ,
-          PopupMenuButton(
-              offset: Offset(0, 50),
-              itemBuilder: (context)=>[
+        bottom: AppBar(
+          toolbarHeight: 45,
+          automaticallyImplyLeading: false,
+
+          title: Row(
+            children: [
+
+              Container(
+                child: IconButton(onPressed: (){}, icon: Badge.count(
+                    count: 0,
+                    padding: EdgeInsets.all(0.1),
+                    child: FaIcon(FontAwesomeIcons.bell,size: 20,color: Colors.white,)),color: Colors.white,),
+              ),
+              Container(
+                width: 5,
+              ),
+              Container(
+                child: Text("Hi, Md. Saiful Islam",style: TextStyle(fontSize: 12,color: Colors.white,fontWeight: FontWeight.bold),),
+              ),
+              Container(
+                width: 5,
+              ),
+              PopupMenuButton(
+                  offset: Offset(0, 50),
+                  itemBuilder: (context)=>[
+
+                    PopupMenuItem(
+                      child: Row(
+                        children: [
+                          Container(margin: EdgeInsets.only(left: 10,right: 10),child: FaIcon(FontAwesomeIcons.user,size: 16,color: Colors.black,)),
+                          Container(child: Text("Profile",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 16),),),
+                        ],
+                      ), onTap: (){
+                      Navigator.of(context).pop();
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context)=> profile(),
+                      ));
+                    },
+
+                    ),
+
+                    PopupMenuItem(child: Row(
+                      children: [
+                        Container(margin: EdgeInsets.only(left: 10,right: 10),child: FaIcon(FontAwesomeIcons.exchange,size: 16,color: Colors.black,)),
+                        Container(child: Text("Change Password",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 16),),),
+                      ],
+                    ), onTap: (){
+                      Navigator.of(context).pop();
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context)=> updatePass(),
+                      ));
+                    },
+
+                    ),
+
+                    PopupMenuItem(child: Row(
+                      children: [
+                        Container(margin: EdgeInsets.only(left: 10,right: 10),child: FaIcon(FontAwesomeIcons.signInAlt,size: 16,color: Colors.black,)),
+                        Container(child: Text("LogOut",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 16),),),
+                      ],
+                    ), onTap: () async{
+
+                      var sharedPref= await SharedPreferences.getInstance();
+                      sharedPref.setBool(mainLState.KEYLOGIN, false);
+                      //Navigator.of(context).pop(true);
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context)=>loginPage(),
+                      ));
+                    },
+                    ),
 
 
-                PopupMenuItem(child: Row(
-                  children: [
-                    Container(margin: EdgeInsets.only(left: 10,right: 10),child: FaIcon(FontAwesomeIcons.exchange,size: 16,color: Colors.black,)),
-                    Container(child: Text("Change Password",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 16),),),
+                  ],icon: CircleAvatar(
+                backgroundImage: AssetImage("assets/bateman.jpg",),radius: 19,
+              )
+                //FaIcon(FontAwesomeIcons.userCog,size: 25,color: Colors.white,),color: Colors.white,
+              ),
+
+            ],
+          ),
+
+
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Color.fromARGB(255, 255, 255, 255),
+                    Color.fromARGB(255, 40, 65, 111),
+                    Color.fromARGB(255, 40, 65, 111),
                   ],
-                ), onTap: (){
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context)=> updatePass(),
-                  ));
-                },
-
-                ),
-
-                PopupMenuItem(child: Row(
-                  children: [
-                    Container(margin: EdgeInsets.only(left: 10,right: 10),child: FaIcon(FontAwesomeIcons.signInAlt,size: 16,color: Colors.black,)),
-                    Container(child: Text("LogOut",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 16),),),
-                  ],
-                ), onTap: () async{
-
-                  var sharedPref= await SharedPreferences.getInstance();
-                  sharedPref.setBool(mainLState.KEYLOGIN, false);
-                  //Navigator.of(context).pop(true);
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context)=>loginPage(),
-                  ));
-                },
-                ),
+                )),
+          ),
 
 
-              ],icon: CircleAvatar(
-              backgroundImage: AssetImage("assets/bateman.jpg",)
-          )
-            //FaIcon(FontAwesomeIcons.userCog,size: 25,color: Colors.white,),color: Colors.white,
-          )
-        ],
+        ),
       ),
         drawer: Drawer(
           backgroundColor: Color.fromARGB(255, 40, 65, 111),
@@ -684,7 +753,6 @@ class profile extends StatelessWidget {
 
     );
   }
-
 }
 
 String getpfName(){

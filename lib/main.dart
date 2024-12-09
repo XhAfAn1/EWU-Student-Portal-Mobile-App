@@ -57,7 +57,8 @@ class _HomeState extends State<Home> {
   Future<void> refresh (){
     Timer(const Duration(seconds: 1), truMsg);
     return Future.delayed(Duration(seconds: 1));
-  }void truMsg() {
+  }
+  void truMsg() {
     setState(() {
       isVisible = true;
     });
