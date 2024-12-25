@@ -153,6 +153,7 @@ class _HomeState extends State<Home> {
               children: [
 
                 Container(
+
                 child: IconButton(onPressed: (){}, icon: Badge.count(
                     count: 0,
                     padding: EdgeInsets.all(0.1),
